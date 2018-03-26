@@ -1,0 +1,10 @@
+image: node:latest
+
+before_script:
+  - npm install
+
+lint:
+  script:
+    - npm run lint
+  tags:
+    - lint
