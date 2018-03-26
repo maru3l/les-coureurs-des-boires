@@ -4,6 +4,7 @@
   "description": "",
   "main": "gatsby-config.js",
   "scripts": {
+    "start": "npm run develop",
     "build": "gatsby build",
     "dev": "npm run develop",
     "develop": "gatsby develop --host 0.0.0.0",
