@@ -1,0 +1,12 @@
+html,
+body {
+  @extend %body-font-family;
+  font-size: #{$font-size * 1px};
+  line-height: 2em;
+  color: $color-primary;
+}
+
+p {
+  text-align: justify;
+  margin: 1em 0;
+}
