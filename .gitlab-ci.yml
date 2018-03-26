@@ -6,5 +6,3 @@ before_script:
 lint:
   script:
     - npm run lint
-  tags:
-    - lint
