@@ -2,7 +2,12 @@
 
 .site-header {
   padding: #{40 / 1920 * 100vw} #{70 / 1920 * 100vw};
+  padding-right: 96px;
   display: flex;
+  position: fixed;
+  width: 100vw;
+  box-sizing: border-box;
+  top: 0;
 
   &__logo {
     width: #{(165 / 1920) * 100vw};
@@ -11,11 +16,17 @@
     min-height: 54px;
     fill: $color-primary;
     padding-right: 38px;
+    position: relative;
+    z-index: 1;
+
+    &--is-light {
+      fill: $color-white;
+    }
   }
 
   &::after {
     border-top: 1px solid $color-primary;
-    width: 100%;
+    flex: 2 2;
     content: '';
     display: block;
   }
