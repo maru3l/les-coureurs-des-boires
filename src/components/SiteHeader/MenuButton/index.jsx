@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 
 import './style.scss';
 
-const MenuButton = ({ open }) => {
+const MenuButton = ({ open, onClick }) => {
   const menuButtonClass = classNames(
     'menu-button',
     { 'menu-button--is-open': open },
   );
 
   return (
-    <button className={menuButtonClass}>
+    <button className={menuButtonClass} onClick={() => onClick()}>
       <span className="menu-button__bread menu-button__bread--first">
         <span className="menu-button__crust" />
       </span>
