@@ -1,0 +1,25 @@
+@import "../../../assets/styles/setup.scss";
+
+.site-menu {
+  transform: translateX(100vw);
+  transition: transform 800ms ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  &--is-open {
+    transform: translateX(0);
+  }
+
+  &__content {
+    background-color: $color-primary;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+  }
+}
