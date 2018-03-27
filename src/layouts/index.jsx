@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import 'normalize.css';
 
+import Footer from '../components/SiteFooter';
+
 import './../assets/fonts/bebasNeue/bebasNeue.css';
 
 import './../assets/styles/styles.scss';
@@ -10,6 +12,8 @@ import './../assets/styles/styles.scss';
 const TemplateWrapper = ({ children }) => (
   <div>
     { children() }
+
+    <Footer />
   </div>
 );
 
