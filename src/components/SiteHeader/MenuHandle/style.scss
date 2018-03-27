@@ -1,0 +1,41 @@
+@import "../../../assets/styles/setup.scss";
+
+.menu-handle {
+  $_parent: &;
+
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-flow: column;
+  z-index: 1;
+
+  &__follow {
+    flex: 2 2;
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+
+    p {
+      text-align: center;
+      writing-mode: vertical-lr;
+      transform: scale(-1);
+      cursor: pointer;
+
+    }
+
+    &::after,
+    &::before {
+      flex: 2 2;
+      display: block;
+      content: '';
+    }
+
+    &::before {
+      background-color: $color-primary;
+      width: 1px;
+      margin: 28px 0 0;
+    }
+  }
+}
