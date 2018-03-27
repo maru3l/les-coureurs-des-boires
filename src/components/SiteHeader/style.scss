@@ -1,0 +1,22 @@
+@import "../../assets/styles/setup.scss";
+
+.site-header {
+  padding: #{40 / 1920 * 100vw} #{70 / 1920 * 100vw};
+  display: flex;
+
+  &__logo {
+    width: #{(165 / 1920) * 100vw};
+    min-width: 165px;
+    height: #{(54 / 1920) * 100vw};
+    min-height: 54px;
+    fill: $color-primary;
+    padding-right: 38px;
+  }
+
+  &::after {
+    border-top: 1px solid $color-primary;
+    width: 100%;
+    content: '';
+    display: block;
+  }
+}
