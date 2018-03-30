@@ -11,11 +11,23 @@
   flex-flow: column;
   z-index: 1;
 
+  &--is-open {
+    #{$_parent}__follow {
+      opacity: 0;
+    }
+  }
+
   &__follow {
     flex: 2 2;
     display: flex;
     align-items: center;
     flex-flow: column;
+    opacity: 0;
+    transition: opacity 800ms;
+
+    @media(min-width: 1024px) {
+      opacity: 1;
+    }
 
     p {
       text-align: center;

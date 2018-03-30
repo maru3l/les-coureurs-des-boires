@@ -29,10 +29,12 @@ const MenuButton = ({ open, onClick }) => {
 
 MenuButton.propTypes = {
   open: PropTypes.bool,
+  onClick: PropTypes.func,
 };
 
 MenuButton.defaultProps = {
   open: false,
+  onClick: () => {},
 };
 
 export default MenuButton;

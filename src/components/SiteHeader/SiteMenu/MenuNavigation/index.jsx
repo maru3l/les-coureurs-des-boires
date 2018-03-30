@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'gatsby-link';
+import PropTypes from 'prop-types';
 
 import './style.scss';
 
@@ -27,3 +28,13 @@ export default () => (
     </ul>
   </nav>
 );
+
+ListItemLink.propTypes = {
+  children: PropTypes.func,
+  to: PropTypes.string,
+};
+
+ListItemLink.defaultProps = {
+  children: () => {},
+  to: PropTypes.string,
+};
