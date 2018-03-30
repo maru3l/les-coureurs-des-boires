@@ -20,11 +20,9 @@ class SiteMenu extends Component {
     );
     return (
       <div className={siteMenuClass}>
-        <div className="site-menu__content">
-          <Navigation />
+        <Navigation />
 
-          <Social />
-        </div>
+        <Social />
       </div>
     );
   }
