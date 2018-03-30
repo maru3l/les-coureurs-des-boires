@@ -4,7 +4,7 @@ import Link from 'gatsby-link';
 import './style.scss';
 
 const ListItemLink = ({ to, children }) => (
-  <li>
+  <li className="site-navigation__list-item">
     <Link
       to={to}
       className="site-navigation__link"
@@ -17,7 +17,7 @@ const ListItemLink = ({ to, children }) => (
 
 export default () => (
   <nav className="site-navigation">
-    <ul>
+    <ul className="site-navigation__list">
       <ListItemLink to="voyages">Voyages</ListItemLink>
       <ListItemLink to="editoriaux">Éditoriaux</ListItemLink>
       <ListItemLink to="degustations">Dégustations</ListItemLink>
