@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
 import Navigation from './MenuNavigation';
 import Social from './MenuSocial';
@@ -27,5 +28,13 @@ class SiteMenu extends Component {
     );
   }
 }
+
+SiteMenu.propTypes = {
+  open: PropTypes.bool,
+};
+
+SiteMenu.defaultProps = {
+  open: false,
+};
 
 export default SiteMenu;

@@ -12,6 +12,7 @@
   display: flex;
   flex-flow: column;
   justify-content: center;
+  overflow: scroll;
 
   &--is-open {
     opacity: 1;
