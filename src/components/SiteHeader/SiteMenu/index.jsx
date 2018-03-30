@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 
 import Navigation from './MenuNavigation';
+import Social from './MenuSocial';
 
 import './style.scss';
 
@@ -20,9 +21,9 @@ class SiteMenu extends Component {
     return (
       <div className={siteMenuClass}>
         <div className="site-menu__content">
-
           <Navigation />
 
+          <Social />
         </div>
       </div>
     );
