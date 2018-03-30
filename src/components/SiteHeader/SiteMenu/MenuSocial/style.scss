@@ -1,0 +1,32 @@
+@import "../../../../assets/styles/setup.scss";
+
+.menu-social {
+  margin: 0 auto;
+  padding: 0;
+
+  // position: absolute;
+  // bottom: 0;
+  // right: 0;
+
+  &__list-item {
+    width: #{(172 / 320) * 100vw};
+    max-width: 222px;
+    border-bottom: 1px solid $color-secondary-light;
+  }
+
+  &__link {
+    @extend %body-font-family;
+    color: $color-secondary-light;
+    font-size: 0.857rem;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0;
+    padding: 0.667em 0;
+    border: 0;
+    line-height: 1em;
+    background-color: inherit;
+    text-align: left;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+}
