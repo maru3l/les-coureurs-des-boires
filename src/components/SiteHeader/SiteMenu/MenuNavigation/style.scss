@@ -23,7 +23,8 @@
     &::after {
       background-color: $color-primary-light;
       height: .4em;
-      width: 347px;
+      width: #{(300 / 320) * 100vw};
+      max-width: 347px;
       content: '';
       display: block;
       position: absolute;
