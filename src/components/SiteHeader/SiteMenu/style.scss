@@ -13,8 +13,10 @@
   flex-flow: column;
   justify-content: center;
   overflow: scroll;
+  pointer-events: none;
 
   &--is-open {
     opacity: 1;
+    pointer-events: auto;
   }
 }
