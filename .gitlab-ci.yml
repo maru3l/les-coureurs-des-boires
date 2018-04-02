@@ -1,7 +1,9 @@
 image: node:latest
 
 cache:
-    paths:
+  key: "$CI_COMMIT_REF_SLUG"
+  untracked: true
+  paths:
     - node_modules/
 
 
