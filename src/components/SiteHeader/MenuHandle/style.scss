@@ -14,6 +14,12 @@
   &--is-open {
     #{$_parent}__follow {
       opacity: 0;
+      pointer-events: none;
+    }
+
+    #{$_parent}__search {
+      opacity: 0;
+      pointer-events: none;
     }
   }
 
@@ -24,9 +30,15 @@
     flex-flow: column;
     opacity: 0;
     transition: opacity 800ms;
+    background-color: inherit;
+    outline: inherit;
+    cursor: pointer;
+    border: 0;
+    pointer-events: none;
 
     @media(min-width: 1024px) {
       opacity: 1;
+      pointer-events: auto;
     }
 
     p {
@@ -48,6 +60,31 @@
       background-color: $color-primary;
       width: 1px;
       margin: 28px 0 0;
+    }
+  }
+
+  &__search {
+    text-align: center;
+    padding-bottom: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: inherit;
+    outline: inherit;
+    position: relative;
+    cursor: pointer;
+    border: 0;
+    pointer-events: none;
+
+    @media(min-width: 1024px) {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    svg {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
     }
   }
 }
