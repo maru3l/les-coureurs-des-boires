@@ -1,0 +1,84 @@
+@import "../../../assets/styles/setup.scss";
+
+.menu-button {
+  $_parent: &;
+
+  background-color: $color-primary;
+  border: 0;
+  height: 82px;
+  width: 73px;
+  position: relative;
+  outline: 0;
+  cursor: pointer;
+
+  &__bread {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    &--first {
+      transition: 200ms;
+      #{$_parent}__crust {
+        transform: translateY(-9.5px);
+        transition: all 250ms 200ms;
+
+        #{$_parent}--is-open & {
+          transform: translateY(0) scaleX(3) scaleY(.33);
+          transition: all 200ms;
+        }
+      }
+
+      #{$_parent}--is-open & {
+        transform: rotate(-45deg);
+        transition: all 150ms 250ms;
+      }
+    }
+
+    &--second {
+      #{$_parent}__crust {
+        transition: 200ms 300ms;
+        #{$_parent}--is-open & {
+          transform: scale(0);
+          transition: 250ms;
+        }
+      }
+    }
+
+    &--third {
+      transition: 200ms;
+      #{$_parent}__crust {
+        transform: translateY(9.5px);
+        transition: all 250ms 200ms;
+
+
+        #{$_parent}--is-open & {
+          transform: translateY(0) scaleX(3) scaleY(.33);
+          transition: all 200ms;
+        }
+      }
+
+      #{$_parent}--is-open & {
+        transform: rotate(45deg);
+        transition: all 150ms 250ms;
+      }
+    }
+  }
+
+  &__crust {
+    width: 16px;
+    height: 3px;
+    background-color: $color-white;
+    display: block;
+    content: '';
+    top: 39.5px;
+    left: 28.5px;
+    position: absolute;
+    transform-origin: center center;
+  }
+
+  // &--open {
+  //   #{$_parent}
+  // }
+}
