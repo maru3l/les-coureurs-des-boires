@@ -1,5 +1,4 @@
 const autoprefixer = require('autoprefixer');
-require('dotenv').config();
 
 module.exports = {
   siteMetadata: {
@@ -21,13 +20,6 @@ module.exports = {
       options: {
         postCssPlugins: [autoprefixer()],
         precision: 8,
-      },
-    },
-    {
-      resolve: 'gatsby-source-prismic',
-      options: {
-        repositoryName: process.env.prismicRepositoryName,
-        accessToken: process.env.prismicAccessToken,
       },
     },
     'gatsby-plugin-sitemap',
