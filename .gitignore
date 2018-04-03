@@ -60,3 +60,6 @@ bundle-stats.json
 
 # System files
 .DS_Store
+
+# Variable files
+.env
