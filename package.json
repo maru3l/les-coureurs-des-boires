@@ -10,7 +10,8 @@
     "develop": "gatsby develop --host 0.0.0.0",
     "lint": "npm run lint:es",
     "lint:es": "eslint --ext .js,.jsx --ignore-pattern public .",
-    "format": "pretier-eslint --write \"**/*.{js,jsx}\""
+    "format": "pretier-eslint --write \"**/*.{js,jsx}\"",
+    "test": "npm run lint"
   },
   "repository": {
     "type": "git",
