@@ -1,0 +1,47 @@
+@import "../../assets/styles/setup.scss";
+
+.page-title {
+  height: #{(463 / 1080) * 100vh};
+  min-height: 400px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: $color-white;
+  padding: 0 #{(289 / 1920) * 100vw};
+
+  &__content {
+    width: #{(327 / 1920) * 100vw};
+    min-width: 280px;
+    display: flex;
+    flex-flow: column;
+    height: 90px;
+    justify-content: space-between;
+
+    &::after {
+      background-color: $color-background;
+      display: block;
+      height: 12px;
+      content: '';
+      order: 2;
+    }
+
+    &::before {
+      background-color: $color-background;
+      display: block;
+      height: 12px;
+      content: '';
+      order: 2;
+    }
+  }
+
+  &__title {
+    font-size: #{(24 / 14) * 1rem};
+    text-transform: uppercase;
+    text-align: right;
+    line-height: 12px;
+    background-color: $color-background;
+    order: 0;
+    margin: 0;
+    padding: 0 27px;
+  }
+}
