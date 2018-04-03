@@ -31,6 +31,7 @@ module.exports = {
       },
     },
     'gatsby-plugin-sitemap',
+    'gatsby-plugin-netlify-cms',
     'gatsby-plugin-netlify',
   ],
 };
