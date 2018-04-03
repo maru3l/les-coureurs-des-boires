@@ -16,8 +16,6 @@ collections:
       - { name: cover, label: Couverture }
       - { name: link, label: Lien magasin }
       - { name: video, label: Vidéo }
-
-collections:
   - name: article
     label: Article
     folder: data/articles
