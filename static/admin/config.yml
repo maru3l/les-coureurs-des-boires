@@ -4,13 +4,14 @@ backend:
 
 publish_mode: editorial_workflow
 
-media_folder: static/assets
+media_folder: static/images
+public_folder: /images
 
 collections:
-  - name: livre
-    label: Livres
-    label_singular: Livre
-    folder: data/books
+  - name: "livre"
+    label: "Livres"
+    label_singular: "Livre"
+    folder: "data/books"
     slug: "{{slug}}"
     create: true
     editor:
@@ -23,10 +24,10 @@ collections:
       - { name: link, label: Lien magasin }
       - { name: video, label: Vidéo }
 
-  - name: article
-    label: Articles
-    label_singular: Article
-    folder: data/articles
+  - name: "article"
+    label: "Articles"
+    label_singular: "Article"
+    folder: "data/articles"
     create: true
     slug: "{{slug}}"
     fields:
