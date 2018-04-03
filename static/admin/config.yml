@@ -2,7 +2,7 @@ backend:
   name: git-gateway
   branch: develop
 
-# publish_mode: editorial_workflow
+publish_mode: editorial_workflow
 
 media_folder: static/images
 public_folder: /images
@@ -35,5 +35,5 @@ collections:
       - { name: title, label: Titre, widget: "string", required: true }
       - { name: description, label: Description, widget: "text", required: true }
       - { name: body, label: Texte, widget: "markdown", required: true }
-      - { name: author, label: Auteur, widget: "string", required: true }
+      - { name: author, label: Auteur, widget: "string" }
       - { name: category, label: Catégorie }
