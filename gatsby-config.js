@@ -24,20 +24,6 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: 'articles',
-        path: `${__dirname}/data/articles`,
-      },
-    },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: 'books',
-        path: `${__dirname}/data/books`,
-      },
-    },
-    {
       resolve: 'gatsby-source-contentful',
       options: {
         spaceId: process.env.CONTENTFUL_SPACE_ID,
@@ -46,7 +32,6 @@ module.exports = {
     },
     'gatsby-transformer-remark',
     'gatsby-plugin-sitemap',
-    // 'gatsby-plugin-netlify-cms',
     'gatsby-plugin-netlify',
   ],
 };
