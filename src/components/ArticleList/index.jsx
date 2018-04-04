@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import './style.scss';
@@ -17,9 +18,9 @@ const ArticleListItem = ({ article, index }) => {
           src={article.thumbnail.src}
           alt={article.thumbnail.alt}
         />
-        <p className="article-list__item-date">Publié 12/05/2017</p>
+        <p className="article-list__item-date">Publié {article.date}</p>
         <h3 className="article-list__item-title">{article.title}</h3>
-        <p className="article-list__item-text">{article.content}</p>
+        <p className="article-list__item-text">{article.excerpt}</p>
       </div>
     </li>
   );
@@ -32,5 +33,15 @@ const ArticleList = ({ articles }) => (
     }
   </ul>
 );
+
+ArticleListItem.propTypes = {
+  article: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
+};
+
+ArticleList.propTypes = {
+  articles: PropTypes.func.isRequired,
+};
+
 
 export default ArticleList;
