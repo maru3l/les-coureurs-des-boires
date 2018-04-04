@@ -36,6 +36,7 @@ module.exports = {
         path: `${__dirname}/data/books`,
       },
     },
+    'gatsby-transformer-remark',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-netlify-cms',
     'gatsby-plugin-netlify',
