@@ -37,3 +37,4 @@ collections:
       - { name: body, label: Texte, widget: "markdown", required: true }
       - { name: author, label: Auteur, widget: "string" }
       - { name: category, label: Catégorie }
+      - { name: thumbnail, label: Image de présentation, widget: image }
