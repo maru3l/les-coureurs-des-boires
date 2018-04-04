@@ -36,6 +36,7 @@
     "gatsby-plugin-postcss-sass": "^1.0.19",
     "gatsby-plugin-react-helmet": "^2.0.9",
     "gatsby-plugin-sitemap": "^1.2.20",
+    "gatsby-source-filesystem": "^1.5.28",
     "normalize.css": "^8.0.0",
     "react": "^16.3.0",
     "react-dom": "^16.3.0",

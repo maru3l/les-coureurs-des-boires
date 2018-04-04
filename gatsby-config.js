@@ -22,6 +22,20 @@ module.exports = {
         precision: 8,
       },
     },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'articles',
+        path: `${__dirname}/data/articles`,
+      },
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'books',
+        path: `${__dirname}/data/books`,
+      },
+    },
     'gatsby-plugin-sitemap',
     'gatsby-plugin-netlify-cms',
     'gatsby-plugin-netlify',
