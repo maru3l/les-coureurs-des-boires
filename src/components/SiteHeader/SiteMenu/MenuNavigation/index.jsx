@@ -30,11 +30,6 @@ export default () => (
 );
 
 ListItemLink.propTypes = {
-  children: PropTypes.func,
-  to: PropTypes.string,
-};
-
-ListItemLink.defaultProps = {
-  children: () => {},
-  to: PropTypes.string,
+  children: PropTypes.node.isRequired,
+  to: PropTypes.string.isRequired,
 };
