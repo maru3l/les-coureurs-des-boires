@@ -8,4 +8,6 @@ cache:
     - "node_modules"
 
 notifications:
-  slack: $SLACK_KEY
+  slack:
+    rooms:
+      - $SLACK_KEY
