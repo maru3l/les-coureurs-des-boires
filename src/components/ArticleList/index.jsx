@@ -29,18 +29,18 @@ const ArticleListItem = ({ article, index }) => {
 const ArticleList = ({ articles }) => (
   <ul className="article-list">
     {articles.map((article, index) =>
-      <ArticleListItem article={article} index={index} />)
+      <ArticleListItem article={article} index={index} key={article.id} />)
     }
   </ul>
 );
 
 ArticleListItem.propTypes = {
-  article: PropTypes.func.isRequired,
+  article: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
 };
 
 ArticleList.propTypes = {
-  articles: PropTypes.func.isRequired,
+  articles: PropTypes.array.isRequired,
 };
 
 
