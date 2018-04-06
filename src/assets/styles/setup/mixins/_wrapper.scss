@@ -1,0 +1,4 @@
+@mixin wrapper() {
+  margin-right: my-margin-calculation();
+  margin-left: my-margin-calculation();
+}
