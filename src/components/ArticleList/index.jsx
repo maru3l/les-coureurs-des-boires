@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Link from 'gatsby-link';
 
 import './style.scss';
+
+import ReadMoreLink from '../ui/ReadMoreLink';
 
 const ArticleListItem = ({ article, index }) => {
   const itemClass = classNames(
@@ -22,18 +23,24 @@ const ArticleListItem = ({ article, index }) => {
         <p className="article-list__item-date">Publié {article.date}</p>
         <h3 className="article-list__item-title">{article.title}</h3>
         <p className="article-list__item-text">{article.excerpt}</p>
-        <Link to={article.path}>Read more</Link>
+        <p className="article-list__item-link">
+          <ReadMoreLink to={article.path} />
+        </p>
       </div>
     </li>
   );
 };
 
-const ArticleList = ({ articles }) => (
-  <ul className="article-list">
-    {articles.map((article, index) =>
-      <ArticleListItem article={article} index={index} key={article.id} />)
-    }
-  </ul>
+const ArticleList = ({ title, articles }) => (
+  <section className="article-list">
+    <h2 className="article-list__title">{ title }</h2>
+
+    <ul className="article-list__list">
+      {articles.map((article, index) =>
+        <ArticleListItem article={article} index={index} key={article.id} />)
+      }
+    </ul>
+  </section>
 );
 
 ArticleListItem.propTypes = {
@@ -49,6 +56,11 @@ ArticleListItem.propTypes = {
 
 ArticleList.propTypes = {
   articles: PropTypes.arrayOf(PropTypes.object).isRequired,
+  title: PropTypes.string,
+};
+
+ArticleList.defaultProps = {
+  title: 'Articles',
 };
 
 
