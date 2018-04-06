@@ -9,6 +9,9 @@ const ReadMoreLink = ({ to }) => (
     <span className="read-more-link__dot" />
     <span className="read-more-link__dot" />
     <span className="read-more-link__dot" />
+    <span className="read-more-link__visuallyhidden">
+      Lire l'article complet.
+      </span>
   </Link>
 );
 
