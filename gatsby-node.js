@@ -58,17 +58,17 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         });
 
         // Generate tags page
-        const tags = result.data.allContentfulArticle.edges
-          .reduce((acc, { node }) => [...acc, ...node.tags], [])
-          .filter((el, i, self) => i === self.indexOf(el));
-
-        tags.forEach((tag) => {
-          createPage({
-            path: `/tags/${tag}`,
-            component: path.resolve('./src/templates/tagPage.jsx'),
-            context: { tag },
-          });
-        });
+        // const tags = result.data.allContentfulArticle.edges
+        //   .reduce((acc, { node }) => [...acc, ...node.tags], [])
+        //   .filter((el, i, self) => i === self.indexOf(el));
+        //
+        // tags.forEach((tag) => {
+        //   createPage({
+        //     path: `/tags/${tag}`,
+        //     component: path.resolve('./src/templates/tagPage.jsx'),
+        //     context: { tag },
+        //   });
+        // });
 
         resolve();
       })
