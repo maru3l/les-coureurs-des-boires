@@ -50,7 +50,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         result.data.allContentfulArticle.edges.forEach(({ node }) => {
           createPage({
             path: node.fields.path,
-            component: path.resolve('./src/templates/article.jsx'),
+            component: path.resolve('./src/templates/article/index.jsx'),
             context: {
               id: node.id,
             },
