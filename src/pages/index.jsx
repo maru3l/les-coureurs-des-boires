@@ -19,7 +19,7 @@ class IndexPage extends Component {
         sizes: node.hero.sizes,
         alt: node.hero.description,
       },
-      date: node.createdAt,
+      date: node.publicationDate,
       title: node.title,
       excerpt: node.description.description,
       id: node.id,
