@@ -15,8 +15,13 @@ const Article = ({ data }) => {
   const partOne = `<p>${paragraphs.slice(0, 2).join('</p>\n<p>')}</p>`;
   const partTwo = `<p>${paragraphs.slice(2).join('</p>\n<p>')}</p>`;
 
-  const imageOne = article.gallery[0];
-  const imageTwo = article.gallery[1];
+  // const imageTwo = {};
+  // const imageOne = {};
+  //
+  // if (article.gallery) {
+  //   imageTwo = article.gallery[1];
+  //   imageOne = article.gallery[0];
+  // }
 
   return (
     <React.Fragment>
@@ -27,19 +32,19 @@ const Article = ({ data }) => {
 
           <div dangerouslySetInnerHTML={{ __html: partOne }} />
 
-          <Img sizes={imageOne.sizes} alt={imageOne.description} />
         </div>
 
         <Img sizes={article.hero.sizes} />
 
         <div className="article-page__part article-page__part--second">
           <div dangerouslySetInnerHTML={{ __html: partTwo }} />
-          <Img sizes={imageTwo.sizes} alt={imageTwo.description} />
         </div>
       </div>
     </React.Fragment>
   );
 };
+// <Img sizes={imageOne.sizes} alt={imageOne.description} />
+// <Img sizes={imageTwo.sizes} alt={imageTwo.description} />
 // <Img className="article-page__hero" />
 
 export const query = graphql`
