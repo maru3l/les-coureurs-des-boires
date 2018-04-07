@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Img from 'gatsby-image';
+import Link from 'gatsby-link';
 
 import './style.scss';
 
@@ -22,7 +23,7 @@ const ArticleListItem = ({ article, index }) => {
           alt={article.thumbnail.alt}
         />
         <p className="article-list__item-date">Publié {article.date}</p>
-        <h3 className="article-list__item-title">{article.title}</h3>
+        <h3 className="article-list__item-title"><Link to={article.path}>{article.title}</Link></h3>
         <p className="article-list__item-text">{article.excerpt}</p>
         <p className="article-list__item-link">
           <ReadMoreLink to={article.path} />
