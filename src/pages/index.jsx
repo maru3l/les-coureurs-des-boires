@@ -21,7 +21,7 @@ class IndexPage extends Component {
       },
       date: node.createdAt,
       title: node.title,
-      excerpt: node.body.childMarkdownRemark.excerpt,
+      excerpt: node.description.description,
       id: node.id,
       path: node.fields.path,
     }));
@@ -56,12 +56,7 @@ export const query = graphql`
             }
             description
           }
-          body {
-            id
-            childMarkdownRemark {
-              excerpt
-            }
-          }
+          description
           publicationDate(formatString: "DD/MM/YYYY")
           fields {
             path
