@@ -22,26 +22,31 @@
       display: block;
       height: 12px;
       content: '';
-      order: 2;
-    }
-
-    &::before {
-      background-color: $color-background;
-      display: block;
-      height: 12px;
-      content: '';
-      order: 2;
+      order: 1;
     }
   }
 
-  &__title {
+  &__title,
+  &__sub-title {
     font-size: #{(24 / 14) * 1rem};
     text-transform: uppercase;
     text-align: right;
     line-height: 12px;
     background-color: $color-background;
-    order: 0;
     margin: 0;
     padding: 0 27px;
+    min-height: 12px;
+  }
+
+  &__title {
+    order: 0;
+
+    &::before {
+      content: '— ';
+    }
+  }
+
+  &__sub-title {
+    order: 2;
   }
 }
