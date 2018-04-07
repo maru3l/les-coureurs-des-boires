@@ -30,6 +30,8 @@ module.exports = {
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
       },
     },
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-sharp',
     'gatsby-transformer-remark',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-netlify',
