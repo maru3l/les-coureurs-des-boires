@@ -62,7 +62,7 @@ export const query = graphql`
               excerpt
             }
           }
-          createdAt(formatString: "DD/MM/YYYY")
+          publicationDate(formatString: "DD/MM/YYYY")
           fields {
             path
           }
