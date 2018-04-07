@@ -56,7 +56,9 @@ export const query = graphql`
             }
             description
           }
-          description
+          description {
+            description
+          }
           publicationDate(formatString: "DD/MM/YYYY")
           fields {
             path
