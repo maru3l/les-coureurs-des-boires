@@ -16,7 +16,7 @@ class IndexPage extends Component {
   getArticles() {
     return this.state.articles.map(({ node }) => ({
       thumbnail: {
-        src: node.thumbnail.file.url,
+        sizes: node.thumbnail.sizes,
         alt: node.thumbnail.description,
       },
       date: node.createdAt,
@@ -51,8 +51,8 @@ export const query = graphql`
           id
           title
           thumbnail {
-            file {
-              url
+            sizes(maxWidth: 304) {
+              ...GatsbyContentfulSizes_withWebp
             }
             description
           }

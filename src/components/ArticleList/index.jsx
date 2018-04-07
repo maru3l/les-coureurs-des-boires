@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import Img from 'gatsby-image';
 
 import './style.scss';
 
@@ -15,9 +16,9 @@ const ArticleListItem = ({ article, index }) => {
   return (
     <li className={itemClass}>
       <div className="article-list__item-contener">
-        <img
+        <Img
           className="article-list__item-thumbnail"
-          src={article.thumbnail.src}
+          sizes={article.thumbnail.sizes}
           alt={article.thumbnail.alt}
         />
         <p className="article-list__item-date">Publié {article.date}</p>
@@ -45,7 +46,10 @@ const ArticleList = ({ title, articles }) => (
 
 ArticleListItem.propTypes = {
   article: PropTypes.shape({
-    thumbnail: PropTypes.object,
+    thumbnail: PropTypes.shape({
+      sizes: PropTypes.object,
+      alt: PropTypes.string,
+    }),
     date: PropTypes.string,
     title: PropTypes.string,
     excerpt: PropTypes.string,
