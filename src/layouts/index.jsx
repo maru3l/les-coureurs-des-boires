@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
 
 import 'normalize.css';
 
@@ -12,6 +13,9 @@ import './../assets/styles/styles.scss';
 
 const TemplateWrapper = ({ children }) => (
   <div>
+    <Helmet>
+      <html lang="fr" />
+    </Helmet>
     <Header />
 
     <main>

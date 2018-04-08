@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Img from 'gatsby-image';
-// import stringify from 'remark-stringify';
-// import {} from 'gatsby-transformer-remark';
 import RehypeReact from 'rehype-react';
+import Helmet from 'react-helmet';
 
 // import Button from '../../components/ui/Button';
 import PageTitle from '../../components/PageTitle';
@@ -18,12 +17,12 @@ class Article extends Component {
   constructor(props) {
     super(props);
 
-    this.article = props.data.contentfulArticle;
+    this.article = props.data.article;
   }
 
   getGalleryPictureObject(id) {
-    return (id > 0 && id <= this.article.gallery.length)
-      ? this.article.gallery[id - 1]
+    return (id > 0 && id <= this.article.sitePicture.length)
+      ? this.article.sitePicture[id - 1]
       : null;
   }
 
@@ -44,8 +43,25 @@ class Article extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <React.Fragment>
+        <Helmet>
+          <title>{`${this.article.title} | Les coureurs des boires`}</title>
+          <meta name="description" content={this.article.description.description} />
+
+          <meta name="twitter:card" value="summary" />
+
+          <meta property="og:title" content={`${this.article.title} | Les coureurs des boires`} />
+          <meta property="og:type" content="article" />
+          <meta property="og:url" content={`https://www.lescoureursdesboires.com${this.props.location.pathname}`} />
+          <meta property="og:image" content={this.article.hero.ogMeta.src} />
+          <meta property="og:description" content={this.article.description.description} />
+          <meta property="og:site_name" content="Les coureurs des boires" />
+
+          <link rel="canonical" href={`https://www.lescoureursdesboires.com${this.props.location.pathname}`} />
+        </Helmet>
+
         <PageTitle title={this.article.category} subTitle={this.article.country.name} />
         <div className="article-page">
           <h1 className="article-page__title">{this.article.title}</h1>
@@ -86,7 +102,7 @@ class Article extends Component {
 
 export const query = graphql`
   query ArticleTemplate($id: String!) {
-    contentfulArticle(id: {eq: $id}) {
+    article:contentfulArticle(id: {eq: $id}) {
       title
       category
       body{
@@ -100,11 +116,13 @@ export const query = graphql`
         sizes(maxWidth: 1940) {
           ...GatsbyContentfulSizes_withWebp
         }
+        ogMeta:resize(width: 1200) {
+          src
+        }
         description
       }
-      gallery {
-        id
-        sizes {
+      sitePicture:gallery {
+        sizes(maxWidth: 700) {
           ...GatsbyContentfulSizes_withWebp
         }
         description
@@ -112,13 +130,16 @@ export const query = graphql`
       country {
         name
       }
+      description {
+        description
+      }
     }
   }
 `;
 
 Article.propTypes = {
   data: PropTypes.shape({
-    contentfulArticle: PropTypes.shape({
+    article: PropTypes.shape({
       title: PropTypes.string,
       category: PropTypes.string,
       body: PropTypes.shape({

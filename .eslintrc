@@ -26,6 +26,6 @@
     },
   },
   "settings": {
-    "import/core-modules": ['react', 'prop-types']
+    "import/core-modules": ['react', 'prop-types', 'react-helmet']
   },
 }
