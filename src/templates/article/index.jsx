@@ -1,51 +1,88 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Img from 'gatsby-image';
+// import stringify from 'remark-stringify';
+// import {} from 'gatsby-transformer-remark';
+import RehypeReact from 'rehype-react';
 
 // import Button from '../../components/ui/Button';
 import PageTitle from '../../components/PageTitle';
 
 import './style.scss';
 
-const Article = ({ data }) => {
-  const article = data.contentfulArticle;
+const renderAst = new RehypeReact({
+  createElement: React.createElement,
+}).Compiler;
 
-  const paragraphs = article.body.body.split('\n').filter(el => el !== '');
+class Article extends Component {
+  constructor(props) {
+    super(props);
 
-  const partOne = `<p>${paragraphs.slice(0, 2).join('</p>\n<p>')}</p>`;
-  const partTwo = `<p>${paragraphs.slice(2).join('</p>\n<p>')}</p>`;
+    this.article = props.data.contentfulArticle;
+  }
 
-  // const imageTwo = {};
-  // const imageOne = {};
-  //
-  // if (article.gallery) {
-  //   imageTwo = article.gallery[1];
-  //   imageOne = article.gallery[0];
-  // }
+  getGalleryPictureObject(id) {
+    return (id > 0 && id <= this.article.gallery.length)
+      ? this.article.gallery[id - 1]
+      : null;
+  }
 
-  return (
-    <React.Fragment>
-      <PageTitle title={article.category} subTitle={article.country.name} />
-      <div className="article-page">
-        <div className="article-page__part article-page__part--first">
-          <h1>{article.title}</h1>
+  getHtmlAstPart(partNumber) {
+    const htmlAst = { ...this.article.body.childMarkdownRemark.htmlAst };
+    const firstPart = htmlAst.children.reduce((acc, cur) =>
+      ((acc.filter(el => el.tagName === 'p').length < 2)
+        ? [...acc, ...cur]
+        : acc), []);
 
-          <div dangerouslySetInnerHTML={{ __html: partOne }} />
+    if (partNumber === 1) {
+      htmlAst.children = firstPart;
+    } else {
+      htmlAst.children = htmlAst.children.slice(firstPart.length);
+    }
+
+    return htmlAst;
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        <PageTitle title={this.article.category} subTitle={this.article.country.name} />
+        <div className="article-page">
+          <h1 className="article-page__title">{this.article.title}</h1>
+
+          <div className="article-page__part">
+            <div className="article-page__part-image article-page__part-image--first">
+              <Img
+                sizes={this.getGalleryPictureObject(1).sizes}
+                alt={this.getGalleryPictureObject(1).description}
+              />
+            </div>
+
+            <div className="article-page__first-part-text">
+              {renderAst(this.getHtmlAstPart(1))}
+            </div>
+          </div>
+
+          <Img className="article-page__hero" sizes={this.article.hero.sizes} />
+
+          <div className="article-page__part">
+            <div className="article-page__second-part-text">
+              {renderAst(this.getHtmlAstPart(2))}
+            </div>
+
+            <div className="article-page__part-image article-page__part-image--second">
+              <Img
+                sizes={this.getGalleryPictureObject(2).sizes}
+                alt={this.getGalleryPictureObject(2).description}
+              />
+            </div>
+          </div>
 
         </div>
-
-        <Img sizes={article.hero.sizes} />
-
-        <div className="article-page__part article-page__part--second">
-          <div dangerouslySetInnerHTML={{ __html: partTwo }} />
-        </div>
-      </div>
-    </React.Fragment>
-  );
-};
-// <Img sizes={imageOne.sizes} alt={imageOne.description} />
-// <Img sizes={imageTwo.sizes} alt={imageTwo.description} />
-// <Img className="article-page__hero" />
+      </React.Fragment>
+    );
+  }
+}
 
 export const query = graphql`
   query ArticleTemplate($id: String!) {
@@ -56,6 +93,7 @@ export const query = graphql`
         body
         childMarkdownRemark{
           html
+          htmlAst
         }
       }
       hero {
