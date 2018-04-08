@@ -43,7 +43,6 @@ class Article extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <React.Fragment>
         <Helmet>
@@ -148,6 +147,9 @@ Article.propTypes = {
         }),
       }),
     }),
+  }).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
   }).isRequired,
 };
 
