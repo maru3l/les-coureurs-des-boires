@@ -31,13 +31,17 @@
     }
 
     &--first {
-      max-width: #{(500 / 1920) * 100vw};
+      @media(min-width: $_breakpoint * 1px) {
+        max-width: #{(500 / 1920) * 100vw};
+      }
       order: 2;
     }
 
     &--second {
-      margin-right: #{(109 / 1920) * 100vw};
-      max-width: #{(391 / 1920) * 100vw};
+      @media(min-width: $_breakpoint * 1px) {
+        margin-right: #{(109 / 1920) * 100vw};
+        max-width: #{(391 / 1920) * 100vw};
+      }
       align-self: center;
     }
   }
@@ -54,8 +58,13 @@
   }
 
   &__hero {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
     @media(min-width: $_breakpoint * 1px) {
+      width: auto;
+      margin-left: auto;
       margin-right: my-margin-calculation();
+      margin-top: #{(86 / 1920) * 100vw};
     }
   }
 
