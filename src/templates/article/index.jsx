@@ -18,6 +18,7 @@ class Article extends Component {
     super(props);
 
     this.article = props.data.article;
+    this.site = props.data.site;
   }
 
   getGalleryPictureObject(id) {
@@ -46,7 +47,7 @@ class Article extends Component {
     return (
       <React.Fragment>
         <Helmet>
-          <title>{`${this.article.title} | Les coureurs des boires`}</title>
+          <title>{`${this.article.title} | ${this.site.siteMetadata.title}`}</title>
           <meta name="description" content={this.article.description.description} />
 
           <meta name="twitter:card" value="summary" />
@@ -58,7 +59,7 @@ class Article extends Component {
           <meta property="og:description" content={this.article.description.description} />
           <meta property="og:site_name" content="Les coureurs des boires" />
 
-          <link rel="canonical" href={`https://www.lescoureursdesboires.com${this.props.location.pathname}`} />
+          <link rel="canonical" href={`${this.site.siteMetadata.siteUrl}${this.props.location.pathname}`} />
         </Helmet>
 
         <PageTitle title={this.article.category} subTitle={this.article.country.name} />
@@ -101,6 +102,12 @@ class Article extends Component {
 
 export const query = graphql`
   query ArticleTemplate($id: String!) {
+    site {
+      siteMetadata {
+        title
+        siteUrl
+      }
+    }
     article:contentfulArticle(id: {eq: $id}) {
       title
       category
@@ -138,6 +145,12 @@ export const query = graphql`
 
 Article.propTypes = {
   data: PropTypes.shape({
+    site: PropTypes.shape({
+      siteMetadata: PropTypes.shape({
+        title: PropTypes.string,
+        siteUrl: PropTypes.string,
+      }),
+    }),
     article: PropTypes.shape({
       title: PropTypes.string,
       category: PropTypes.string,
