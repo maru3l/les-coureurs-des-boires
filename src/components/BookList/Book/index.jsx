@@ -8,6 +8,16 @@ const Book = ({ book }) => (
   <li className="book">
     <div className="book__cover-container">
       <Img className="book__cover" sizes={book.cover.sizes} />
+      <p>
+        <a
+          href={book.buyingLink}
+          target="_blank"
+          className="book__link"
+          rel="noopener noreferrer"
+        >
+          Acheter
+        </a>
+      </p>
     </div>
 
     <div className="book__content-container">
