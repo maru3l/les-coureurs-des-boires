@@ -1,11 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import PageTitle from '../../components/PageTitle';
 import BookList from '../../components/BookList';
 
 const PageLivre = ({ data }) => {
-  const { books, site } = data;
-  console.log(data);
+  const { books } = data;
   return (
     <React.Fragment>
       <PageTitle title="livres" />
@@ -43,5 +43,13 @@ export const query = graphql`
     }
   }
 `;
+
+PageLivre.propTypes = {
+  data: PropTypes.shape({
+    books: PropTypes.shape({
+      edges: PropTypes.array,
+    }),
+  }).isRequired,
+};
 
 export default PageLivre;
