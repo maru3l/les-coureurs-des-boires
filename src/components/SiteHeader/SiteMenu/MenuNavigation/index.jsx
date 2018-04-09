@@ -19,12 +19,12 @@ const ListItemLink = ({ to, children }) => (
 export default () => (
   <nav className="site-navigation">
     <ul className="site-navigation__list">
-      <ListItemLink to="voyages">Voyages</ListItemLink>
-      <ListItemLink to="editoriaux">Éditoriaux</ListItemLink>
-      <ListItemLink to="degustations">Dégustations</ListItemLink>
+      {/* <ListItemLink to="voyages">Voyages</ListItemLink> */}
+      {/* <ListItemLink to="editoriaux">Éditoriaux</ListItemLink> */}
+      {/* <ListItemLink to="degustations">Dégustations</ListItemLink> */}
       <ListItemLink to="livres">Livres</ListItemLink>
-      <ListItemLink to="conferences">Conférences</ListItemLink>
-      <ListItemLink to="les-coureurs">Les coureurs</ListItemLink>
+      {/* <ListItemLink to="conferences">Conférences</ListItemLink> */}
+      {/* <ListItemLink to="les-coureurs">Les coureurs</ListItemLink> */}
     </ul>
   </nav>
 );
