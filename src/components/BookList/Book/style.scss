@@ -49,7 +49,9 @@
   }
 
   &__title-container {
-    width: #{(466 / 1920) * 100vw};
+    @media(min-width: $_breakpoint * 1px) {
+      width: #{(466 / 1920) * 100vw};
+    }
   }
 
   &__title {
