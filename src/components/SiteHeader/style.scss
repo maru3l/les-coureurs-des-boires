@@ -10,6 +10,7 @@
   width: 100vw;
   box-sizing: border-box;
   top: 0;
+  z-index: $zindex-sticky;
 
   &__logo {
     width: #{(165 / 1920) * 100vw};
