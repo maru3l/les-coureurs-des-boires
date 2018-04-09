@@ -12,7 +12,7 @@ import './../assets/fonts/bebasNeue/bebasNeue.css';
 import './../assets/styles/styles.scss';
 
 const TemplateWrapper = ({ children }) => (
-  <div>
+  <React.Fragment>
     <Helmet>
       <html lang="fr" />
     </Helmet>
@@ -23,7 +23,7 @@ const TemplateWrapper = ({ children }) => (
     </main>
 
     <Footer />
-  </div>
+  </React.Fragment>
 );
 
 TemplateWrapper.propTypes = {
