@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import HomeHero from '../components/HomeHero';
+import FeaturedArticle from '../components/FeaturedArticle';
 import ArticleList from '../components/ArticleList';
 
 class IndexPage extends Component {
@@ -26,19 +27,30 @@ class IndexPage extends Component {
       excerpt: node.description.description,
       id: node.id,
       path: node.fields.path,
-    }));
+    })).slice(2);
+  }
+
+  getFeaturedArticles() {
+    return this.state.articles.map(({ node }) => ({
+      thumbnail: {
+        sizes: node.hero.sizes,
+        alt: node.hero.description,
+      },
+      date: node.publicationDate,
+      title: node.title,
+      excerpt: node.description.description,
+      id: node.id,
+      path: node.fields.path,
+    })).slice(0, 2);
   }
 
   render() {
     return (
       <div>
         <HomeHero background={this.data.background.childImageSharp} />
-        <h1>Les coureurs des boires</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia illum
-          nemo consectetur, dolor dicta expedita quos similique, tempore eaque
-          laboriosam tenetur veniam aperiam nisi eligendi fugit eum omnis blanditiis ex.
-        </p>
+        <div>
+          {this.getFeaturedArticles().map(article => <FeaturedArticle article={article} />)}
+        </div>
         <ArticleList articles={this.getArticles()} title="Articles" />
       </div>
     );
@@ -47,7 +59,7 @@ class IndexPage extends Component {
 
 export const query = graphql`
   query IndexQuery {
-    allContentfulArticle(sort: {order: DESC, fields: [publicationDate]}) {
+    allContentfulArticle(sort: {order: DESC, fields: [publicationDate]}, limit: 8) {
       edges {
         node {
           id
