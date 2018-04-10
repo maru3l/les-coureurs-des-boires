@@ -21,9 +21,12 @@ class Article extends Component {
     this.site = props.data.site;
   }
 
-  getGalleryPictureObject(id) {
+  getImageComponentFromGallery(id) {
     return (id > 0 && id <= this.article.sitePicture.length)
-      ? this.article.sitePicture[id - 1]
+      ? <Img
+        sizes={this.article.sitePicture[id - 1].sizes}
+        alt={this.article.sitePicture[id - 1].description}
+      />
       : null;
   }
 
@@ -41,6 +44,12 @@ class Article extends Component {
     }
 
     return htmlAst;
+  }
+
+  getSubTitle() {
+    return this.article.country
+      ? this.article.country.name
+      : null;
   }
 
   render() {
@@ -62,16 +71,13 @@ class Article extends Component {
           <link rel="canonical" href={`${this.site.siteMetadata.siteUrl}${this.props.location.pathname}`} />
         </Helmet>
 
-        <PageTitle title={this.article.category} subTitle={this.article.country.name} />
+        <PageTitle title={this.article.category} subTitle={this.getSubTitle()} />
         <div className="article-page">
           <h1 className="article-page__title">{this.article.title}</h1>
 
           <div className="article-page__part">
             <div className="article-page__part-image article-page__part-image--first">
-              <Img
-                sizes={this.getGalleryPictureObject(1).sizes}
-                alt={this.getGalleryPictureObject(1).description}
-              />
+              { this.getImageComponentFromGallery(1) }
             </div>
 
             <div className="article-page__first-part-text">
@@ -87,10 +93,7 @@ class Article extends Component {
             </div>
 
             <div className="article-page__part-image article-page__part-image--second">
-              <Img
-                sizes={this.getGalleryPictureObject(2).sizes}
-                alt={this.getGalleryPictureObject(2).description}
-              />
+              { this.getImageComponentFromGallery(2) }
             </div>
           </div>
 
