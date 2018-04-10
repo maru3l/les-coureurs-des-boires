@@ -23,8 +23,6 @@ const EditoriauxPage = ({ data }) => {
     return [];
   };
 
-  console.log(articles());
-
   const style = {};
 
   style.title = {
