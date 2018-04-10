@@ -5,17 +5,25 @@ import PageTitle from '../components/PageTitle';
 import ArticleList from '../components/ArticleList';
 
 const EditoriauxPage = ({ data }) => {
-  const articles = data.articles.edges.map(({ node }) => ({
-    thumbnail: {
-      sizes: node.hero.sizes,
-      alt: node.hero.description,
-    },
-    date: node.publicationDate,
-    title: node.title,
-    excerpt: node.description.description,
-    id: node.id,
-    path: node.fields.path,
-  }));
+  const articles = () => {
+    if (data.articles) {
+      return data.articles.edges.map(({ node }) => ({
+        thumbnail: {
+          sizes: node.hero.sizes,
+          alt: node.hero.description,
+        },
+        date: node.publicationDate,
+        title: node.title,
+        excerpt: node.description.description,
+        id: node.id,
+        path: node.fields.path,
+      }));
+    }
+
+    return [];
+  };
+
+  console.log(articles());
 
   const style = {};
 
@@ -34,7 +42,7 @@ const EditoriauxPage = ({ data }) => {
     <React.Fragment>
       <h1 style={style.title}>Éditoriaux</h1>
       <PageTitle title="Éditoriaux" />
-      <ArticleList articles={articles} />
+      <ArticleList articles={articles()} />
     </React.Fragment>
   );
 };

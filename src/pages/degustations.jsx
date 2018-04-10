@@ -5,17 +5,23 @@ import PageTitle from '../components/PageTitle';
 import ArticleList from '../components/ArticleList';
 
 const DégustationsPage = ({ data }) => {
-  const articles = data.articles.edges.map(({ node }) => ({
-    thumbnail: {
-      sizes: node.hero.sizes,
-      alt: node.hero.description,
-    },
-    date: node.publicationDate,
-    title: node.title,
-    excerpt: node.description.description,
-    id: node.id,
-    path: node.fields.path,
-  }));
+  const articles = () => {
+    if (data.articles) {
+      return data.articles.edges.map(({ node }) => ({
+        thumbnail: {
+          sizes: node.hero.sizes,
+          alt: node.hero.description,
+        },
+        date: node.publicationDate,
+        title: node.title,
+        excerpt: node.description.description,
+        id: node.id,
+        path: node.fields.path,
+      }));
+    }
+
+    return [];
+  };
 
   const style = {};
 
@@ -34,13 +40,13 @@ const DégustationsPage = ({ data }) => {
     <React.Fragment>
       <h1 style={style.title}>Dégustations</h1>
       <PageTitle title="Dégustations" />
-      <ArticleList articles={articles} />
+      <ArticleList articles={articles()} />
     </React.Fragment>
   );
 };
 
 export const query = graphql`
-  query EditoriauxQuery {
+  query DegustationsQuery {
     articles:allContentfulArticle(
       sort: {order: DESC, fields: [publicationDate]},
       filter: {category: {eq: "Dégustation"}}) {
