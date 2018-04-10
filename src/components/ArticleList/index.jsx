@@ -8,6 +8,12 @@ import './style.scss';
 
 import ReadMoreLink from '../ui/ReadMoreLink';
 
+const renderTitle = (string) => {
+  return string
+    ? <h2 className="article-list__title">{ string }</h2>
+    : null;
+};
+
 const ArticleListItem = ({ article, index }) => {
   const itemClass = classNames(
     'article-list__item',
@@ -35,7 +41,7 @@ const ArticleListItem = ({ article, index }) => {
 
 const ArticleList = ({ title, articles }) => (
   <section className="article-list">
-    <h2 className="article-list__title">{ title }</h2>
+    {renderTitle(title)}
 
     <ul className="article-list__list">
       {articles.map((article, index) =>
@@ -65,7 +71,7 @@ ArticleList.propTypes = {
 };
 
 ArticleList.defaultProps = {
-  title: 'Articles',
+  title: null,
 };
 
 

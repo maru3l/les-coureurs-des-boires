@@ -30,7 +30,6 @@ class IndexPage extends Component {
   }
 
   render() {
-    console.log(this.data);
     return (
       <div>
         <HomeHero background={this.data.background.childImageSharp} />
@@ -40,7 +39,7 @@ class IndexPage extends Component {
           nemo consectetur, dolor dicta expedita quos similique, tempore eaque
           laboriosam tenetur veniam aperiam nisi eligendi fugit eum omnis blanditiis ex.
         </p>
-        <ArticleList articles={this.getArticles()} />
+        <ArticleList articles={this.getArticles()} title="Articles" />
       </div>
     );
   }
@@ -48,7 +47,7 @@ class IndexPage extends Component {
 
 export const query = graphql`
   query IndexQuery {
-    allContentfulArticle(sort: {order: DESC, fields: [createdAt]}) {
+    allContentfulArticle(sort: {order: DESC, fields: [publicationDate]}) {
       edges {
         node {
           id
