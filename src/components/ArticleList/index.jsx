@@ -8,11 +8,11 @@ import './style.scss';
 
 import ReadMoreLink from '../ui/ReadMoreLink';
 
-const renderTitle = (string) => {
-  return string
+const renderTitle = string => (
+  string
     ? <h2 className="article-list__title">{ string }</h2>
-    : null;
-};
+    : null
+);
 
 const ArticleListItem = ({ article, index }) => {
   const itemClass = classNames(
