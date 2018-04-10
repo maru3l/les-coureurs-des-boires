@@ -1,16 +1,18 @@
 const path = require('path');
 
-exports.onCreateNode = ({ node, boundActionCreators }) => {
+exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
   const { createNodeField } = boundActionCreators;
   if (node.internal.type === 'ContentfulArticle') {
     let slugPath = '';
+    let country = '';
 
     switch (node.category) {
       case 'Éditorial':
         slugPath = '/editoriaux/';
         break;
       case 'Voyage':
-        slugPath = '/voyages/';
+        country = getNode(node.country___NODE).slug;
+        slugPath = `/voyages/${country}/`;
         break;
       case 'Dégustation':
         slugPath = '/degustations/';
