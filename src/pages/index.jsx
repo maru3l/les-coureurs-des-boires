@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import HomeHero from '../components/HomeHero';
 import ArticleList from '../components/ArticleList';
 
 class IndexPage extends Component {
@@ -8,6 +9,7 @@ class IndexPage extends Component {
     super(props);
 
     const { data } = props;
+    this.data = data;
 
     this.state = {
       articles: data.allContentfulArticle.edges,
@@ -28,9 +30,10 @@ class IndexPage extends Component {
   }
 
   render() {
+    console.log(this.data);
     return (
       <div>
-        <div style={{ height: '60vh', backgroundColor: 'white' }} />
+        <HomeHero background={this.data.background.childImageSharp} />
         <h1>Les coureurs des boires</h1>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia illum
@@ -66,6 +69,13 @@ export const query = graphql`
         }
       }
     }
+    background:file(name: {eq: "MG_4563B"}) {
+    childImageSharp {
+      sizes {
+        ...GatsbyImageSharpSizes_withWebp
+      }
+    }
+  }
   }
 `;
 
