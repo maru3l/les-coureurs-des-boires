@@ -25,14 +25,16 @@
       text-align: center;
 
       #{$_parent}:nth-child(2n) & {
-        order: 0
+        order: 0;
+        padding-left: 0;
       }
     }
   }
 
   &__image {
     @media(min-width: $_breakpoint * 1px) {
-      width: #{(260 / 1920) * 100vw};
+      // width: #{(260 / 1920) * 100vw};
+      width: 30vw;
     }
   }
 

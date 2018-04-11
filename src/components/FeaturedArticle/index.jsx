@@ -17,7 +17,7 @@ const FeaturedArticle = ({ article }) => {
         <img src="" alt="" />
       </div>
       <div className="featured-article__image-container">
-        <Img className="book__cover" sizes={article.thumbnail.sizes} />
+        <Img className="featured-article__image" sizes={article.thumbnail.sizes} />
       </div>
     </div>
   );
