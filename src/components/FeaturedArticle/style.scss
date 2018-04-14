@@ -44,6 +44,7 @@
     @media(min-width: $_breakpoint * 1px) {
       padding: my-margin-calculation() 0;
       border-left: 1px solid $color-grey;
+      width: #{(466 / 1920) * 100vw};
 
       #{$_parent}:nth-child(2n) & {
         margin-left: my-margin-calculation();
@@ -69,11 +70,5 @@
       background-color: $color-secondary-light;
     }
 
-  }
-
-  &__excerpt {
-    @media(min-width: $_breakpoint * 1px) {
-      width: #{(466 / 1920) * 100vw};
-    }
   }
 }
