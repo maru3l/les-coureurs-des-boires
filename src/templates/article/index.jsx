@@ -126,7 +126,7 @@ export const query = graphql`
         }
       }
       hero {
-        sizes(maxWidth: 1940, maxHeight: 973, cropFocus: FACES) {
+        sizes(maxWidth: 1940, maxHeight: 973) {
           ...GatsbyContentfulSizes_withWebp
         }
         ogMeta:resize(width: 1200) {
