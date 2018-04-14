@@ -60,6 +60,7 @@
   &__hero {
     width: 100vw;
     margin-left: calc(50% - 50vw);
+
     @media(min-width: $_breakpoint * 1px) {
       width: auto;
       margin-left: auto;

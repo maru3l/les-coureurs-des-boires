@@ -22,7 +22,11 @@ const Book = ({ book }) => (
 
     <div className="book__content-container">
       <div className="book__title-container">
-        <h2 className="book__title">{book.title}</h2>
+        <h2 className="book__title">
+          <span className="book__title-text">
+            {book.title}
+          </span>
+        </h2>
       </div>
 
       <div className="book__body" dangerouslySetInnerHTML={{ __html: book.body.childMarkdownRemark.html }} />
