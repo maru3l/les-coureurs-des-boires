@@ -1,12 +1,16 @@
+// vendor
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Img from 'gatsby-image';
-import RehypeReact from 'rehype-react';
-import Helmet from 'react-helmet';
 
-// import Button from '../../components/ui/Button';
+// vendor components
+import Helmet from 'react-helmet';
+import Img from 'gatsby-image';
+import PropTypes from 'prop-types';
+import RehypeReact from 'rehype-react';
+
+// components
 import PageTitle from '../../components/PageTitle';
 
+// style
 import './style.scss';
 
 const renderAst = new RehypeReact({
@@ -22,7 +26,7 @@ class Article extends Component {
   }
 
   getImageComponentFromGallery(id) {
-    return (id > 0 && id <= this.article.sitePicture.length)
+    return (id > 0 && this.article.sitePicture && id <= this.article.sitePicture.length)
       ? <Img
         sizes={this.article.sitePicture[id - 1].sizes}
         alt={this.article.sitePicture[id - 1].description}
