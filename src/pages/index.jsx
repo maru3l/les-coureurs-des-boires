@@ -49,7 +49,8 @@ class IndexPage extends Component {
       <div>
         <HomeHero background={this.data.background.childImageSharp} />
         <div>
-          {this.getFeaturedArticles().map(article => <FeaturedArticle article={article} />)}
+          {this.getFeaturedArticles().map(article =>
+            <FeaturedArticle article={article} key={article.id} />)}
         </div>
         <ArticleList articles={this.getArticles()} title="Articles" />
       </div>
