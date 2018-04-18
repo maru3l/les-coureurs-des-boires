@@ -1,40 +1,39 @@
-import React, { Component } from 'react';
+// vendor
+import React from 'react';
+
+// utils
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
+// components
 import Navigation from './MenuNavigation';
 import Social from './MenuSocial';
 
+// style
 import './style.scss';
 
-class SiteMenu extends Component {
-  constructor(props) {
-    super(props);
+const SiteMenu = (props) => {
+  const siteMenuClass = classNames('site-menu', {
+    'site-menu--is-open': props.open,
+  });
 
-    this.state = {};
-  }
+  return (
+    <div className={siteMenuClass}>
+      <Navigation onLinkClick={() => props.onLinkClick()} />
 
-  render() {
-    const siteMenuClass = classNames(
-      'site-menu',
-      { 'site-menu--is-open': this.props.open },
-    );
-    return (
-      <div className={siteMenuClass}>
-        <Navigation />
-
-        <Social />
-      </div>
-    );
-  }
-}
+      <Social />
+    </div>
+  );
+};
 
 SiteMenu.propTypes = {
   open: PropTypes.bool,
+  onLinkClick: PropTypes.func,
 };
 
 SiteMenu.defaultProps = {
   open: false,
+  onLinkClick: () => {},
 };
 
 export default SiteMenu;
