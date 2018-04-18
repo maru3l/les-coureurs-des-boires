@@ -1,18 +1,22 @@
+// vendor
 import React from 'react';
-import PropTypes from 'prop-types';
+
+// vendor components
 import classNames from 'classnames';
 import Img from 'gatsby-image';
 import Link from 'gatsby-link';
 
-import './style.scss';
+// utils
+import PropTypes from 'prop-types';
 
+// components
 import ReadMoreLink from '../ui/ReadMoreLink';
 
-const renderTitle = string => (
-  string
-    ? <h2 className="article-list__title">{ string }</h2>
-    : null
-);
+// style
+import './style.scss';
+
+const renderTitle = string =>
+  (string ? <h2 className="article-list__title">{string}</h2> : null);
 
 const ArticleListItem = ({ article, index }) => {
   const itemClass = classNames(
@@ -29,7 +33,9 @@ const ArticleListItem = ({ article, index }) => {
           alt={article.thumbnail.alt}
         />
         <p className="article-list__item-date">Publié {article.date}</p>
-        <h3 className="article-list__item-title"><Link to={article.path}>{article.title}</Link></h3>
+        <h3 className="article-list__item-title">
+          <Link to={article.path}>{article.title}</Link>
+        </h3>
         <p className="article-list__item-text">{article.excerpt}</p>
         <p className="article-list__item-link">
           <ReadMoreLink to={article.path} />
@@ -44,9 +50,9 @@ const ArticleList = ({ title, articles }) => (
     {renderTitle(title)}
 
     <ul className="article-list__list">
-      {articles.map((article, index) =>
-        <ArticleListItem article={article} index={index} key={article.id} />)
-      }
+      {articles.map((article, index) => (
+        <ArticleListItem article={article} index={index} key={article.id} />
+      ))}
     </ul>
   </section>
 );
@@ -73,6 +79,5 @@ ArticleList.propTypes = {
 ArticleList.defaultProps = {
   title: null,
 };
-
 
 export default ArticleList;

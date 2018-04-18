@@ -4,8 +4,10 @@ import React, { Component } from 'react';
 // vendor components
 import Helmet from 'react-helmet';
 import Img from 'gatsby-image';
-import PropTypes from 'prop-types';
 import RehypeReact from 'rehype-react';
+
+// utils
+import PropTypes from 'prop-types';
 
 // components
 import PageTitle from '../../components/PageTitle';
@@ -26,20 +28,25 @@ class Article extends Component {
   }
 
   getImageComponentFromGallery(id) {
-    return (id > 0 && this.article.sitePicture && id <= this.article.sitePicture.length)
-      ? <Img
-        sizes={this.article.sitePicture[id - 1].sizes}
-        alt={this.article.sitePicture[id - 1].description}
-      />
-      : null;
+    return id > 0 &&
+      this.article.sitePicture &&
+      id <= this.article.sitePicture.length ? (
+        <Img
+          sizes={this.article.sitePicture[id - 1].sizes}
+          alt={this.article.sitePicture[id - 1].description}
+        />
+      ) : null;
   }
 
   getHtmlAstPart(partNumber) {
     const htmlAst = { ...this.article.body.childMarkdownRemark.htmlAst };
-    const firstPart = htmlAst.children.reduce((acc, cur) =>
-      ((acc.filter(el => el.tagName === 'p').length < 2)
-        ? [...acc, ...cur]
-        : acc), []);
+    const firstPart = htmlAst.children.reduce(
+      (acc, cur) =>
+        (acc.filter(el => el.tagName === 'p').length < 2
+          ? [...acc, ...cur]
+          : acc),
+      [],
+    );
 
     if (partNumber === 1) {
       htmlAst.children = firstPart;
@@ -51,37 +58,61 @@ class Article extends Component {
   }
 
   getSubTitle() {
-    return this.article.country
-      ? this.article.country.name
-      : null;
+    return this.article.country ? this.article.country.name : null;
   }
 
   render() {
     return (
       <React.Fragment>
         <Helmet>
-          <title>{`${this.article.title} | ${this.site.siteMetadata.title}`}</title>
-          <meta name="description" content={this.article.description.description} />
+          <title>
+            {`${this.article.title} | ${
+              this.site.siteMetadata.title
+            }`}
+          </title>
+          <meta
+            name="description"
+            content={this.article.description.description}
+          />
 
           <meta name="twitter:card" value="summary" />
 
-          <meta property="og:title" content={`${this.article.title} | Les coureurs des boires`} />
+          <meta
+            property="og:title"
+            content={`${this.article.title} | Les coureurs des boires`}
+          />
           <meta property="og:type" content="article" />
-          <meta property="og:url" content={`https://www.lescoureursdesboires.com${this.props.location.pathname}`} />
+          <meta
+            property="og:url"
+            content={`https://www.lescoureursdesboires.com${
+              this.props.location.pathname
+            }`}
+          />
           <meta property="og:image" content={this.article.hero.ogMeta.src} />
-          <meta property="og:description" content={this.article.description.description} />
+          <meta
+            property="og:description"
+            content={this.article.description.description}
+          />
           <meta property="og:site_name" content="Les coureurs des boires" />
 
-          <link rel="canonical" href={`${this.site.siteMetadata.siteUrl}${this.props.location.pathname}`} />
+          <link
+            rel="canonical"
+            href={`${this.site.siteMetadata.siteUrl}${
+              this.props.location.pathname
+            }`}
+          />
         </Helmet>
 
-        <PageTitle title={this.article.category} subTitle={this.getSubTitle()} />
+        <PageTitle
+          title={this.article.category}
+          subTitle={this.getSubTitle()}
+        />
         <div className="article-page">
           <h1 className="article-page__title">{this.article.title}</h1>
 
           <div className="article-page__part">
             <div className="article-page__part-image article-page__part-image--first">
-              { this.getImageComponentFromGallery(1) }
+              {this.getImageComponentFromGallery(1)}
             </div>
 
             <div className="article-page__first-part-text">
@@ -97,10 +128,9 @@ class Article extends Component {
             </div>
 
             <div className="article-page__part-image article-page__part-image--second">
-              { this.getImageComponentFromGallery(2) }
+              {this.getImageComponentFromGallery(2)}
             </div>
           </div>
-
         </div>
       </React.Fragment>
     );
@@ -115,12 +145,12 @@ export const query = graphql`
         siteUrl
       }
     }
-    article:contentfulArticle(id: {eq: $id}) {
+    article: contentfulArticle(id: { eq: $id }) {
       title
       category
-      body{
+      body {
         body
-        childMarkdownRemark{
+        childMarkdownRemark {
           html
           htmlAst
         }
@@ -129,12 +159,12 @@ export const query = graphql`
         sizes(maxWidth: 1940, maxHeight: 973) {
           ...GatsbyContentfulSizes_withWebp
         }
-        ogMeta:resize(width: 1200) {
+        ogMeta: resize(width: 1200) {
           src
         }
         description
       }
-      sitePicture:gallery {
+      sitePicture: gallery {
         sizes(maxWidth: 700) {
           ...GatsbyContentfulSizes_withWebp
         }
