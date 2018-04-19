@@ -4,6 +4,9 @@ import React, { Component } from 'react';
 // vendor components
 // import { navigateTo } from 'gatsby-link';
 
+// utils
+import PropTypes from 'prop-types';
+
 // components
 import ArticleList from '../../components/ArticleList';
 import ElementSelector from '../../components/ElementSelector';
@@ -98,8 +101,7 @@ class VoyagesPage extends Component {
           elementSelected={countrySelected}
         />
 
-        <ArticleList articles={articles} />
-
+        <ArticleList articles={articles} title="Articles liés" />
       </React.Fragment>
     );
   }
@@ -135,5 +137,13 @@ export const query = graphql`
     }
   }
 `;
+
+VoyagesPage.propTypes = {
+  data: PropTypes.shape({
+    articles: PropTypes.shape({
+      edges: PropTypes.array,
+    }),
+  }).isRequired,
+};
 
 export default VoyagesPage;
