@@ -24,27 +24,27 @@ const ListItemLink = ({ to, children, onClick }) => (
 const MenuNavigation = ({ onLinkClick }) => (
   <nav className="site-navigation">
     <ul className="site-navigation__list">
-      <ListItemLink to="voyages" onClick={() => onLinkClick()}>
+      <ListItemLink to="/voyages" onClick={() => onLinkClick()}>
         Voyages
       </ListItemLink>
 
-      <ListItemLink to="editoriaux" onClick={() => onLinkClick()}>
+      <ListItemLink to="/editoriaux" onClick={() => onLinkClick()}>
         Éditoriaux
       </ListItemLink>
 
-      <ListItemLink to="degustations" onClick={() => onLinkClick()}>
+      <ListItemLink to="/degustations" onClick={() => onLinkClick()}>
         Dégustations
       </ListItemLink>
 
-      <ListItemLink to="livres" onClick={() => onLinkClick()}>
+      <ListItemLink to="/livres" onClick={() => onLinkClick()}>
         Livres
       </ListItemLink>
 
-      {/* <ListItemLink to="conferences" onClick={() => onLinkClick()}>
+      {/* <ListItemLink to="/conferences" onClick={() => onLinkClick()}>
         Conférences
       </ListItemLink> */}
 
-      {/* <ListItemLink to="les-coureurs" onClick={() => onLinkClick()}>
+      {/* <ListItemLink to="/les-coureurs" onClick={() => onLinkClick()}>
         Les coureurs
       </ListItemLink> */}
     </ul>
