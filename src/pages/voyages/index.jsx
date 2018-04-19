@@ -80,12 +80,14 @@ class VoyagesPage extends Component {
     const { countrySelected } = this.state;
     const coutriesList = this.getCountries();
     const articles = this.getArticlesFormated(countrySelected);
+    const { siteUrl, title: siteTitle } = this.props.data.site.siteMetadata;
+    const { pathname } = this.props.location;
 
     return (
       <React.Fragment>
         <Helmet>
           <title>
-            {`Voyages | ${this.site.siteMetadata.title}`}
+            {`Voyages | ${siteTitle}`}
           </title>
           {/* }<meta
             name="description"
@@ -101,9 +103,7 @@ class VoyagesPage extends Component {
           <meta property="og:type" content="article" />
           <meta
             property="og:url"
-            content={`https://www.lescoureursdesboires.com${
-              this.props.location.pathname
-            }`}
+            content={`${siteUrl}${pathname}`}
           />
           {/* <meta property="og:image" content={this.article.hero.ogMeta.src} /> */}
           {/* <meta
@@ -114,9 +114,7 @@ class VoyagesPage extends Component {
 
           <link
             rel="canonical"
-            href={`${this.site.siteMetadata.siteUrl}${
-              this.props.location.pathname
-            }`}
+            href={`${siteUrl}${pathname}`}
           />
         </Helmet>
         <PageTitle title="Voyages" />
@@ -147,6 +145,12 @@ class VoyagesPage extends Component {
 
 export const query = graphql`
   query VoyagesQuery {
+    site {
+      siteMetadata {
+        title
+        siteUrl
+      }
+    }
     articles:allContentfulArticle(sort: {order: DESC, fields: [publicationDate]}, filter: {category: {eq: "Voyage"}}) {
       edges {
         node {
@@ -180,6 +184,12 @@ VoyagesPage.propTypes = {
   data: PropTypes.shape({
     articles: PropTypes.shape({
       edges: PropTypes.array,
+    }),
+    site: PropTypes.shape({
+      siteMetadata: PropTypes.shape({
+        title: PropTypes.string,
+        siteUrl: PropTypes.string,
+      }),
     }),
   }).isRequired,
   location: PropTypes.shape({
