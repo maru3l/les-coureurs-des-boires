@@ -42,20 +42,42 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
               fields {
                 path
               }
+              country {
+                id
+                slug
+              }
             }
           }
         }
       }
     `)
       .then((result) => {
+        // Get articles
+        const { data: { allContentfulArticle: { edges: articles } } } = result;
+
+        // get countries slug
+        const countrySlugs = articles.reduce((acc, { node: { country } }) => {
+          if (country === null) return acc;
+          if (acc.find(slug => slug === country.slug)) return acc;
+
+          return [...acc, country.slug];
+        }, []);
+
         // Generate Article page
-        result.data.allContentfulArticle.edges.forEach(({ node }) => {
+        articles.forEach(({ node }) => {
           createPage({
             path: node.fields.path,
             component: path.resolve('./src/templates/article/index.jsx'),
             context: {
               id: node.id,
             },
+          });
+        });
+
+        countrySlugs.forEach((slug) => {
+          createPage({
+            path: `/voyages/${slug}`,
+            component: path.resolve('./src/pages/voyages/index.jsx'),
           });
         });
 
