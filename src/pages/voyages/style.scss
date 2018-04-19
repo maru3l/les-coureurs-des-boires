@@ -1,0 +1,17 @@
+@import "../../assets/styles/setup.scss";
+
+.voyages-page {
+  @include wrapper;
+
+  &__title {
+    @include wrapper;
+    @extend %header-font-family;
+    font-size: #{(38 / 14) * 1rem};
+    max-width: 638px;
+  }
+
+  &__intro-text {
+    @include wrapper;
+    max-width: 638px;
+  }
+}

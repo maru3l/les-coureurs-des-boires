@@ -24,9 +24,9 @@ const ListItemLink = ({ to, children, onClick }) => (
 const MenuNavigation = ({ onLinkClick }) => (
   <nav className="site-navigation">
     <ul className="site-navigation__list">
-      {/* <ListItemLink to="voyages" onClick={() => onLinkClick()}>
+      <ListItemLink to="voyages" onClick={() => onLinkClick()}>
         Voyages
-      </ListItemLink> */}
+      </ListItemLink>
 
       <ListItemLink to="editoriaux" onClick={() => onLinkClick()}>
         Éditoriaux
