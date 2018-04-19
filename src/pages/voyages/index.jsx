@@ -1,6 +1,9 @@
 // vendor
 import React, { Component } from 'react';
 
+// vendor components
+import Helmet from 'react-helmet';
+
 // utils
 import PropTypes from 'prop-types';
 
@@ -80,6 +83,42 @@ class VoyagesPage extends Component {
 
     return (
       <React.Fragment>
+        <Helmet>
+          <title>
+            {`Voyages | ${this.site.siteMetadata.title}`}
+          </title>
+          {/* }<meta
+            name="description"
+            content={this.article.description.description}
+          /> */}
+
+          <meta name="twitter:card" value="summary" />
+
+          <meta
+            property="og:title"
+            content="Voyages | Les coureurs des boires"
+          />
+          <meta property="og:type" content="article" />
+          <meta
+            property="og:url"
+            content={`https://www.lescoureursdesboires.com${
+              this.props.location.pathname
+            }`}
+          />
+          {/* <meta property="og:image" content={this.article.hero.ogMeta.src} /> */}
+          {/* <meta
+            property="og:description"
+            content={this.article.description.description}
+          /> */}
+          <meta property="og:site_name" content="Les coureurs des boires" />
+
+          <link
+            rel="canonical"
+            href={`${this.site.siteMetadata.siteUrl}${
+              this.props.location.pathname
+            }`}
+          />
+        </Helmet>
         <PageTitle title="Voyages" />
 
         <div className="voyages-page">
