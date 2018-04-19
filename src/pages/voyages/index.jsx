@@ -1,9 +1,6 @@
 // vendor
 import React, { Component } from 'react';
 
-// vendor components
-// import { navigateTo } from 'gatsby-link';
-
 // utils
 import PropTypes from 'prop-types';
 
@@ -22,12 +19,8 @@ class VoyagesPage extends Component {
   constructor(props) {
     super(props);
 
-    // const { location } = props;
-
-    // console.log(location);
-
     this.state = {
-      countrySelected: this.getCountries()[0].slug,
+      countrySelected: this.getSlugFromLocation() || this.getCountries()[0].slug || null,
     };
   }
 
@@ -65,12 +58,18 @@ class VoyagesPage extends Component {
     }, []);
   }
 
-  selectCountry(countrySlug) {
-    // navigateTo(`voyages/${countrySlug}`);
-    this.setState({ countrySelected: countrySlug });
+  getSlugFromLocation() {
+    const { location: { pathname } } = this.props;
+    const path = pathname.split('/').filter(e => e.length);
+
+    return path[1]
+      ? path[1]
+      : null;
   }
 
   handleClick(slug) {
+    window.history.pushState({}, '', `/voyages/${slug}/`);
+
     this.setState({ countrySelected: slug });
   }
 
@@ -143,6 +142,9 @@ VoyagesPage.propTypes = {
     articles: PropTypes.shape({
       edges: PropTypes.array,
     }),
+  }).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
   }).isRequired,
 };
 
