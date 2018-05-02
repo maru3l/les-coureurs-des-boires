@@ -92,7 +92,7 @@ export const query = graphql`
     }
     background: file(name: { eq: "MG_4563B" }) {
       childImageSharp {
-        sizes {
+        sizes(quality: 100, jpegProgressive: true) {
           ...GatsbyImageSharpSizes_withWebp
         }
       }
