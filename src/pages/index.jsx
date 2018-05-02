@@ -1,6 +1,13 @@
+// vendor
 import React, { Component } from 'react';
+
+// vendor components
+import Helmet from 'react-helmet';
+
+// utils
 import PropTypes from 'prop-types';
 
+// components
 import HomeHero from '../components/HomeHero';
 import FeaturedArticle from '../components/FeaturedArticle';
 import ArticleList from '../components/ArticleList';
@@ -49,8 +56,35 @@ class IndexPage extends Component {
   }
 
   render() {
+    const {
+      site: {
+        siteMetadata: { siteUrl, title: siteTitle },
+      },
+    } = this.data;
+
     return (
       <div>
+        <Helmet>
+          <title>{`${siteTitle}`}</title>
+          <meta
+            name="description"
+            content="Présentation des bières Coureurs des Boires et d'autres moments de dégustations notables en lien avec les travaux du duo"
+          />
+
+          <meta name="twitter:card" value="summary" />
+
+          <meta property="og:title" content="Les coureurs des boires" />
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content={`${siteUrl}`} />
+          {/* <meta property="og:image" content={this.article.hero.ogMeta.src} /> */}
+          <meta
+            property="og:description"
+            content="Présentation des bières Coureurs des Boires et d'autres moments de dégustations notables en lien avec les travaux du duo"
+          />
+          <meta property="og:site_name" content="Les coureurs des boires" />
+
+          <link rel="canonical" href={`${siteUrl}`} />
+        </Helmet>
         <HomeHero background={this.data.background.childImageSharp} />
         <div>
           {this.getFeaturedArticles().map(article => (
@@ -65,6 +99,12 @@ class IndexPage extends Component {
 
 export const query = graphql`
   query IndexQuery {
+    site {
+      siteMetadata {
+        title
+        siteUrl
+      }
+    }
     allContentfulArticle(
       sort: { order: DESC, fields: [publicationDate] }
       limit: 8
