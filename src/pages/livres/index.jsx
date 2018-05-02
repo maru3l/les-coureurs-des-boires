@@ -22,7 +22,9 @@ export const query = graphql`
         siteUrl
       }
     }
-    books:allContentfulLivre(sort: {order: DESC, fields: [publicationDate]}) {
+    books: allContentfulLivre(
+      sort: { order: DESC, fields: [publicationDate] }
+    ) {
       edges {
         node {
           id
@@ -31,6 +33,7 @@ export const query = graphql`
             sizes(maxWidth: 304) {
               ...GatsbyContentfulSizes_withWebp
             }
+            title
           }
           body {
             childMarkdownRemark {

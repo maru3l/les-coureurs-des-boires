@@ -10,7 +10,7 @@ const EditoriauxPage = ({ data }) => {
       return data.articles.edges.map(({ node }) => ({
         thumbnail: {
           sizes: node.hero.sizes,
-          alt: node.hero.description,
+          alt: node.hero.title,
         },
         date: node.publicationDate,
         title: node.title,
@@ -47,9 +47,10 @@ const EditoriauxPage = ({ data }) => {
 
 export const query = graphql`
   query EditoriauxQuery {
-    articles:allContentfulArticle(
-      sort: {order: DESC, fields: [publicationDate]},
-      filter: {category: {eq: "Éditorial"}}) {
+    articles: allContentfulArticle(
+      sort: { order: DESC, fields: [publicationDate] }
+      filter: { category: { eq: "Éditorial" } }
+    ) {
       edges {
         node {
           id
@@ -60,6 +61,7 @@ export const query = graphql`
               ...GatsbyContentfulSizes_withWebp
             }
             description
+            title
           }
           description {
             description

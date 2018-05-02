@@ -33,7 +33,7 @@ class Article extends Component {
       id <= this.article.sitePicture.length ? (
         <Img
           sizes={this.article.sitePicture[id - 1].sizes}
-          alt={this.article.sitePicture[id - 1].description}
+          alt={this.article.sitePicture[id - 1].title}
         />
       ) : null;
   }
@@ -66,9 +66,7 @@ class Article extends Component {
       <React.Fragment>
         <Helmet>
           <title>
-            {`${this.article.title} | ${
-              this.site.siteMetadata.title
-            }`}
+            {`${this.article.title} | ${this.site.siteMetadata.title}`}
           </title>
           <meta
             name="description"
@@ -120,7 +118,11 @@ class Article extends Component {
             </div>
           </div>
 
-          <Img className="article-page__hero" sizes={this.article.hero.sizes} />
+          <Img
+            className="article-page__hero"
+            sizes={this.article.hero.sizes}
+            alt={this.article.hero.title}
+          />
 
           <div className="article-page__part">
             <div className="article-page__second-part-text">
@@ -162,12 +164,13 @@ export const query = graphql`
         ogMeta: resize(width: 1200) {
           src
         }
-        description
+        title
       }
       sitePicture: gallery {
         sizes(maxWidth: 700) {
           ...GatsbyContentfulSizes_withWebp
         }
+        title
         description
       }
       country {

@@ -17,31 +17,35 @@ class IndexPage extends Component {
     };
   }
   getArticles() {
-    return this.state.articles.map(({ node }) => ({
-      thumbnail: {
-        sizes: node.hero.sizes,
-        alt: node.hero.description,
-      },
-      date: node.publicationDate,
-      title: node.title,
-      excerpt: node.description.description,
-      id: node.id,
-      path: node.fields.path,
-    })).slice(2);
+    return this.state.articles
+      .map(({ node }) => ({
+        thumbnail: {
+          sizes: node.hero.sizes,
+          alt: node.hero.title,
+        },
+        date: node.publicationDate,
+        title: node.title,
+        excerpt: node.description.description,
+        id: node.id,
+        path: node.fields.path,
+      }))
+      .slice(2);
   }
 
   getFeaturedArticles() {
-    return this.state.articles.map(({ node }) => ({
-      thumbnail: {
-        sizes: node.hero.sizes,
-        alt: node.hero.description,
-      },
-      date: node.publicationDate,
-      title: node.title,
-      excerpt: node.description.description,
-      id: node.id,
-      path: node.fields.path,
-    })).slice(0, 2);
+    return this.state.articles
+      .map(({ node }) => ({
+        thumbnail: {
+          sizes: node.hero.sizes,
+          alt: node.hero.title,
+        },
+        date: node.publicationDate,
+        title: node.title,
+        excerpt: node.description.description,
+        id: node.id,
+        path: node.fields.path,
+      }))
+      .slice(0, 2);
   }
 
   render() {
@@ -49,8 +53,9 @@ class IndexPage extends Component {
       <div>
         <HomeHero background={this.data.background.childImageSharp} />
         <div>
-          {this.getFeaturedArticles().map(article =>
-            <FeaturedArticle article={article} key={article.id} />)}
+          {this.getFeaturedArticles().map(article => (
+            <FeaturedArticle article={article} key={article.id} />
+          ))}
         </div>
         <ArticleList articles={this.getArticles()} title="Articles" />
       </div>
@@ -60,7 +65,10 @@ class IndexPage extends Component {
 
 export const query = graphql`
   query IndexQuery {
-    allContentfulArticle(sort: {order: DESC, fields: [publicationDate]}, limit: 8) {
+    allContentfulArticle(
+      sort: { order: DESC, fields: [publicationDate] }
+      limit: 8
+    ) {
       edges {
         node {
           id
@@ -70,6 +78,7 @@ export const query = graphql`
               ...GatsbyContentfulSizes_withWebp
             }
             description
+            title
           }
           description {
             description
@@ -81,13 +90,13 @@ export const query = graphql`
         }
       }
     }
-    background:file(name: {eq: "MG_4563B"}) {
-    childImageSharp {
-      sizes {
-        ...GatsbyImageSharpSizes_withWebp
+    background: file(name: { eq: "MG_4563B" }) {
+      childImageSharp {
+        sizes {
+          ...GatsbyImageSharpSizes_withWebp
+        }
       }
     }
-  }
   }
 `;
 

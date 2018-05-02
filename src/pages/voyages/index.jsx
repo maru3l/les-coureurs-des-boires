@@ -14,16 +14,16 @@ import PageTitle from '../../components/PageTitle';
 
 import './style.scss';
 
-const formatElementSelectorList = list => (
-  list.map(({ slug, name }) => ({ key: slug, value: name }))
-);
+const formatElementSelectorList = list =>
+  list.map(({ slug, name }) => ({ key: slug, value: name }));
 
 class VoyagesPage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      countrySelected: this.getSlugFromLocation() || this.getCountries()[0].slug || null,
+      countrySelected:
+        this.getSlugFromLocation() || this.getCountries()[0].slug || null,
     };
   }
 
@@ -31,7 +31,7 @@ class VoyagesPage extends Component {
     return this.getArticleswhitCountrySlug(slug).map(node => ({
       thumbnail: {
         sizes: node.hero.sizes,
-        alt: node.hero.description,
+        alt: node.hero.title,
       },
       date: node.publicationDate,
       title: node.title,
@@ -42,7 +42,9 @@ class VoyagesPage extends Component {
   }
 
   getArticleswhitCountrySlug(countrySlug) {
-    const { articles: { edges: articles } } = this.props.data;
+    const {
+      articles: { edges: articles },
+    } = this.props.data;
 
     return articles
       .map(({ node: article }) => article)
@@ -50,7 +52,9 @@ class VoyagesPage extends Component {
   }
 
   getCountries() {
-    const { articles: { edges: articles } } = this.props.data;
+    const {
+      articles: { edges: articles },
+    } = this.props.data;
 
     return articles.reduce((acc, { node: { country } }) => {
       if (acc.find(({ slug }) => slug === country.slug)) {
@@ -62,12 +66,12 @@ class VoyagesPage extends Component {
   }
 
   getSlugFromLocation() {
-    const { location: { pathname } } = this.props;
+    const {
+      location: { pathname },
+    } = this.props;
     const path = pathname.split('/').filter(e => e.length);
 
-    return path[1]
-      ? path[1]
-      : null;
+    return path[1] ? path[1] : null;
   }
 
   handleClick(slug) {
@@ -86,9 +90,7 @@ class VoyagesPage extends Component {
     return (
       <React.Fragment>
         <Helmet>
-          <title>
-            {`Voyages | ${siteTitle}`}
-          </title>
+          <title>{`Voyages | ${siteTitle}`}</title>
           {/* }<meta
             name="description"
             content={this.article.description.description}
@@ -101,10 +103,7 @@ class VoyagesPage extends Component {
             content="Voyages | Les coureurs des boires"
           />
           <meta property="og:type" content="article" />
-          <meta
-            property="og:url"
-            content={`${siteUrl}${pathname}`}
-          />
+          <meta property="og:url" content={`${siteUrl}${pathname}`} />
           {/* <meta property="og:image" content={this.article.hero.ogMeta.src} /> */}
           {/* <meta
             property="og:description"
@@ -112,21 +111,21 @@ class VoyagesPage extends Component {
           /> */}
           <meta property="og:site_name" content="Les coureurs des boires" />
 
-          <link
-            rel="canonical"
-            href={`${siteUrl}${pathname}`}
-          />
+          <link rel="canonical" href={`${siteUrl}${pathname}`} />
         </Helmet>
         <PageTitle title="Voyages" />
 
         <div className="voyages-page">
-          <h1 className="voyages-page__title">Titre de la page avec le mot voyage.</h1>
+          <h1 className="voyages-page__title">
+            Titre de la page avec le mot voyage.
+          </h1>
 
           <p className="voyages-page__intro-text">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus
-            itaque adipisci quos officia ex dolore est, reprehenderit excepturi,
-            inventore deserunt. Praesentium pariatur repellendus consequatur minima eius
-            repudiandae recusandae, error quam?
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Necessitatibus itaque adipisci quos officia ex dolore est,
+            reprehenderit excepturi, inventore deserunt. Praesentium pariatur
+            repellendus consequatur minima eius repudiandae recusandae, error
+            quam?
           </p>
         </div>
 
@@ -151,7 +150,10 @@ export const query = graphql`
         siteUrl
       }
     }
-    articles:allContentfulArticle(sort: {order: DESC, fields: [publicationDate]}, filter: {category: {eq: "Voyage"}}) {
+    articles: allContentfulArticle(
+      sort: { order: DESC, fields: [publicationDate] }
+      filter: { category: { eq: "Voyage" } }
+    ) {
       edges {
         node {
           id
@@ -166,6 +168,7 @@ export const query = graphql`
               ...GatsbyContentfulSizes_withWebp
             }
             description
+            title
           }
           description {
             description

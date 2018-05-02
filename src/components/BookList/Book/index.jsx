@@ -7,7 +7,11 @@ import './style.scss';
 const Book = ({ book }) => (
   <li className="book">
     <div className="book__cover-container">
-      <Img className="book__cover" sizes={book.cover.sizes} />
+      <Img
+        className="book__cover"
+        sizes={book.cover.sizes}
+        alt={book.cover.title}
+      />
       <p>
         <a
           href={book.buyingLink}
@@ -23,13 +27,14 @@ const Book = ({ book }) => (
     <div className="book__content-container">
       <div className="book__title-container">
         <h2 className="book__title">
-          <span className="book__title-text">
-            {book.title}
-          </span>
+          <span className="book__title-text">{book.title}</span>
         </h2>
       </div>
 
-      <div className="book__body" dangerouslySetInnerHTML={{ __html: book.body.childMarkdownRemark.html }} />
+      <div
+        className="book__body"
+        dangerouslySetInnerHTML={{ __html: book.body.childMarkdownRemark.html }}
+      />
     </div>
   </li>
 );
@@ -38,6 +43,7 @@ Book.propTypes = {
   book: PropTypes.shape({
     cover: PropTypes.shape({
       sizes: PropTypes.object,
+      title: PropTypes.string,
     }),
     title: PropTypes.string,
     body: PropTypes.shape({
