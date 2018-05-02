@@ -1,6 +1,13 @@
+// vendor
 import React from 'react';
+
+// vendor components
+import Helmet from 'react-helmet';
+
+// utils
 import PropTypes from 'prop-types';
 
+// components
 import PageTitle from '../components/PageTitle';
 import ArticleList from '../components/ArticleList';
 
@@ -36,8 +43,38 @@ const DégustationsPage = ({ data }) => {
     width: '1px',
   };
 
+  const {
+    site: {
+      siteMetadata: { siteUrl, title: siteTitle },
+    },
+  } = data;
+
   return (
     <React.Fragment>
+      <Helmet>
+        <title>{`Dégustations | ${siteTitle}`}</title>
+        <meta
+          name="description"
+          content="Présentation des bières Coureurs des Boires et d'autres moments de dégustations notables en lien avec les travaux du duo"
+        />
+
+        <meta name="twitter:card" value="summary" />
+
+        <meta
+          property="og:title"
+          content="Dégustations | Les coureurs des boires"
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`${siteUrl}/degustations`} />
+        {/* <meta property="og:image" content={this.article.hero.ogMeta.src} /> */}
+        <meta
+          property="og:description"
+          content="Présentation des bières Coureurs des Boires et d'autres moments de dégustations notables en lien avec les travaux du duo"
+        />
+        <meta property="og:site_name" content="Les coureurs des boires" />
+
+        <link rel="canonical" href={`${siteUrl}/degustations`} />
+      </Helmet>
       <h1 style={style.title}>Dégustations</h1>
       <PageTitle title="Dégustations" />
       <ArticleList articles={articles()} />
@@ -47,6 +84,12 @@ const DégustationsPage = ({ data }) => {
 
 export const query = graphql`
   query DegustationsQuery {
+    site {
+      siteMetadata {
+        title
+        siteUrl
+      }
+    }
     articles: allContentfulArticle(
       sort: { order: DESC, fields: [publicationDate] }
       filter: { category: { eq: "Dégustation" } }

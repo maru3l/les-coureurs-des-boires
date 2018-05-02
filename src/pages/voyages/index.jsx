@@ -91,10 +91,10 @@ class VoyagesPage extends Component {
       <React.Fragment>
         <Helmet>
           <title>{`Voyages | ${siteTitle}`}</title>
-          {/* }<meta
+          <meta
             name="description"
-            content={this.article.description.description}
-          /> */}
+            content="Guides de voyages brassicoles dans des cultures traditionnelles de l'Allemagne au Bhoutan, de la Bolivie à la Norvège"
+          />
 
           <meta name="twitter:card" value="summary" />
 
@@ -102,13 +102,13 @@ class VoyagesPage extends Component {
             property="og:title"
             content="Voyages | Les coureurs des boires"
           />
-          <meta property="og:type" content="article" />
+          <meta property="og:type" content="website" />
           <meta property="og:url" content={`${siteUrl}${pathname}`} />
           {/* <meta property="og:image" content={this.article.hero.ogMeta.src} /> */}
-          {/* <meta
+          <meta
             property="og:description"
-            content={this.article.description.description}
-          /> */}
+            content="Guides de voyages brassicoles dans des cultures traditionnelles de l'Allemagne au Bhoutan, de la Bolivie à la Norvège"
+          />
           <meta property="og:site_name" content="Les coureurs des boires" />
 
           <link rel="canonical" href={`${siteUrl}${pathname}`} />
