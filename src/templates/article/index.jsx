@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 
 // components
 import PageTitle from '../../components/PageTitle';
+import Gallery from '../../components/Gallery';
 
 // style
 import './style.scss';
@@ -18,6 +19,16 @@ import './style.scss';
 const renderAst = new RehypeReact({
   createElement: React.createElement,
 }).Compiler;
+
+const galleryArrayConstructor = (gallery = []) =>
+  gallery.map(({
+    id, title, description, sizes: image,
+  }) => ({
+    id,
+    title,
+    description,
+    image,
+  }));
 
 class Article extends Component {
   constructor(props) {
@@ -62,6 +73,8 @@ class Article extends Component {
   }
 
   render() {
+    const { gallery } = this.article;
+
     return (
       <React.Fragment>
         <Helmet>
@@ -134,6 +147,8 @@ class Article extends Component {
             </div>
           </div>
         </div>
+
+        <Gallery images={galleryArrayConstructor(gallery)} />
       </React.Fragment>
     );
   }
@@ -172,6 +187,16 @@ export const query = graphql`
         }
         title
         description
+      }
+      gallery {
+        sizes {
+          base64
+          src
+          aspectRatio
+        }
+        title
+        description
+        id
       }
       country {
         name
