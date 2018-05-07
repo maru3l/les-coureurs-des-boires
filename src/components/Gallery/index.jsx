@@ -11,23 +11,52 @@ import { randomString } from '../../utils';
 import './styles.scss';
 
 const createSlidesArray = (images = []) => {
-  let slides = [];
   let imageList = [...images];
 
   while (imageList.length < 7) {
     const newImage = imageList.map(img => ({
       ...img,
       id: `${img.id}-clone${randomString()}`,
+      active: false,
+      previous: false,
     }));
     imageList = [...imageList, ...newImage];
   }
 
-  slides = imageList.map(({ id, title, image }) => {
-    const ref = React.createRef();
-    return <Slide title={title} image={image} key={id} ref={ref} />;
-  });
+  return imageList;
+};
 
-  return [...slides.slice(-3), ...slides.slice(0, -3)];
+const equilibrate = (array, index) => {
+  const middle = Math.ceil((array.length - 1) / 2);
+  let result = array;
+
+  if (index < middle) {
+    const toMove = index - middle;
+    result = [...array.slice(toMove), ...array.slice(0, toMove)];
+  }
+
+  if (middle < index) {
+    const toMove = index - middle;
+    result = [...array.slice(toMove), ...array.slice(0, toMove)];
+  }
+
+  return result;
+};
+
+const getPosition = (array, id) => {
+  const index = array.findIndex(({ key }) => key === id);
+
+  return array
+    .slice(0, index + 1)
+    .reduce((acc, cur) => acc + cur.props.width, 0);
+};
+
+const setActiveID = (slides, id) => {
+  return slides.map(slide => ({ ...slide, active: slide.id === id }));
+};
+
+const setPreviousID = (slides, id) => {
+  return slides.map(slide => ({ ...slide, previous: slide.id === id }));
 };
 
 class Gallery extends Component {
@@ -37,88 +66,130 @@ class Gallery extends Component {
     const { images } = props;
 
     this.listWrapperRef = React.createRef();
-    this.slides = createSlidesArray(images);
+
+    const slides = createSlidesArray(images);
 
     this.state = {
-      currentSlide: this.slides[3].key,
-      position: 0,
+      slides,
       throttle: false,
     };
   }
 
   componentDidMount() {
-    const position = this.getPosition(this.state.currentSlide);
-    this.setState({
-      position,
-    });
+    const { slides } = this.state;
+    const { id } = slides[0];
+    let newSlides = slides;
+    newSlides = setActiveID(newSlides, id);
+    newSlides = setPreviousID(newSlides, id);
+    this.setState({ slides: newSlides });
   }
 
-  getArrayIndex(keyToFind) {
-    return this.slides.findIndex(({ key }) => key === keyToFind);
+  getActiveId() {
+    const slide = this.state.slides.find(({ active }) => active);
+
+    return slide ? slide.id : 0;
   }
 
-  getPosition(key) {
-    const index = this.getArrayIndex(key);
-    const {
-      current: { offsetHeight, offsetWidth },
-    } = this.listWrapperRef;
-    const width = this.slides
-      .slice(0, index + 1)
-      .reduce(
-        (acc, cur) => acc + cur.props.image.aspectRatio * offsetHeight,
-        0,
-      );
+  getArrayIndex(idToFind) {
+    return this.state.slides.findIndex(({ id }) => id === idToFind);
+  }
 
-    return width - offsetWidth;
+  getPreviousID() {
+    const slide = this.state.slides.find(({ previous }) => previous);
+
+    return slide ? slide.id : 0;
   }
 
   handleClickToPrevious() {
     if (this.state.throttle) return;
 
-    const index = this.getArrayIndex(this.state.currentSlide);
-    const { key } = this.slides[index - 1];
+    const prevID = this.getActiveId();
+    const index = this.getArrayIndex(prevID);
+    let { slides } = this.state;
+    const { length } = slides;
+    let newIndex = index - 1;
 
-    this.move(this.state.currentSlide, key);
+    if (newIndex < 0) {
+      newIndex = length - 1;
+    }
+
+    const { id } = this.state.slides[newIndex];
+
+    slides = setActiveID(slides, id);
+    slides = setPreviousID(slides, prevID);
+
+    this.setState({ slides });
   }
 
   handleClickToNext() {
     if (this.state.throttle) return;
 
-    const index = this.getArrayIndex(this.state.currentSlide);
-    const { key } = this.slides[index + 1];
+    const prevID = this.getActiveId();
+    const index = this.getArrayIndex(prevID);
+    let { slides } = this.state;
+    const { length } = slides;
+    let newIndex = index + 1;
 
-    this.move(this.state.currentSlide, key);
+    if (length <= newIndex) {
+      newIndex = 0;
+    }
+
+    const { id } = this.state.slides[newIndex];
+
+    slides = setActiveID(slides, id);
+    slides = setPreviousID(slides, prevID);
+
+    this.setState({ slides });
   }
 
-  move(oldKey, key) {
-    const oldIndex = this.getArrayIndex(oldKey);
-    const index = this.getArrayIndex(key);
-    this.setState({
-      currentSlide: key,
-      position: this.getPosition(key),
-      throttle: true,
+  generateSlidesComponentsArray() {
+    const { slides: images } = this.state;
+    const activeID = this.getActiveId();
+    let slides = [];
+    let height = 0;
+
+    if (this.listWrapperRef.current) {
+      height = this.listWrapperRef.current.offsetHeight;
+    }
+
+    slides = images.map(({ id, title, image }) => {
+      const ref = React.createRef();
+      const active = activeID === id;
+      return (
+        <Slide
+          title={title}
+          image={image}
+          key={id}
+          ref={ref}
+          height={height}
+          width={height * image.aspectRatio}
+          active={active}
+        />
+      );
     });
 
-    setTimeout(() => {
-      if (oldIndex < index) {
-        this.slides.push(this.slides.shift());
-      } else {
-        this.slides.unshift(this.slides.pop());
-      }
-
-      this.setState({
-        position: this.getPosition(key),
-        throttle: false,
-      });
-    }, 400);
+    return slides;
   }
 
   render() {
-    const { position, throttle } = this.state;
+    // const { throttle } = this.state;
+    const activeID = this.getActiveId();
+    // const previousID = this.getPreviousID();
+    let slidesComponents = this.generateSlidesComponentsArray();
+    slidesComponents = equilibrate(
+      slidesComponents,
+      this.getArrayIndex(activeID),
+    );
+    const position = getPosition(slidesComponents, activeID);
+    let width = 0;
+
+    if (this.listWrapperRef.current) {
+      width = this.listWrapperRef.current.offsetWidth;
+    }
 
     const style = {
-      transform: `translateX(-${position}px)`,
-      transition: throttle ? 'transform 400ms' : 'none',
+      transform: `translateX(-${position - width}px)`,
+      // transition: throttle ? 'transform 400ms' : 'none',
     };
 
     return (
@@ -128,7 +199,7 @@ class Gallery extends Component {
         <div className="gallery__container">
           <div className="gallery__list-wrapper" ref={this.listWrapperRef}>
             <div className="gallery__list" style={style}>
-              {this.slides}
+              {slidesComponents}
             </div>
           </div>
 

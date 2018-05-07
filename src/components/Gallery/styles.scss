@@ -19,16 +19,17 @@
   }
 
   &__list-item {
-    border: 1px solid green;
+    background-size: cover;
+    background-repeat: 0;
     flex-shrink: 1;
     flex-grow: 0;
   }
 
   &__image {
-    height: #{(649 / 1920) * 100vw};
+    opacity: 0.2;
 
-    @media (min-width: 1920px) {
-      height: 649px;
+    &--is-active {
+      opacity: 1;
     }
   }
 }
