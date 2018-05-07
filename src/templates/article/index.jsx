@@ -30,6 +30,13 @@ const galleryArrayConstructor = (gallery = []) =>
     image,
   }));
 
+const createGallery = (gallery = []) => {
+  if (gallery === null || gallery.length < 2) return;
+
+  const galleryList = galleryArrayConstructor(gallery);
+  return <Gallery images={galleryList} />;
+};
+
 class Article extends Component {
   constructor(props) {
     super(props);
@@ -148,7 +155,7 @@ class Article extends Component {
           </div>
         </div>
 
-        <Gallery images={galleryArrayConstructor(gallery)} />
+        {createGallery(gallery)}
       </React.Fragment>
     );
   }
