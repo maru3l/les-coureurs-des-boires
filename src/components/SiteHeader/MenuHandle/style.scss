@@ -1,4 +1,4 @@
-@import "../../../assets/styles/setup.scss";
+@import '../../../assets/styles/setup.scss';
 
 .menu-handle {
   $_parent: &;
@@ -10,6 +10,11 @@
   display: flex;
   flex-flow: column;
   z-index: 1;
+  pointer-events: none;
+
+  @media (min-width: 1024px) {
+    pointer-events: auto;
+  }
 
   &--is-open {
     #{$_parent}__follow {
@@ -36,7 +41,7 @@
     border: 0;
     pointer-events: none;
 
-    @media(min-width: 1024px) {
+    @media (min-width: 1024px) {
       opacity: 1;
       pointer-events: auto;
     }
@@ -46,7 +51,6 @@
       writing-mode: vertical-lr;
       transform: scale(-1);
       cursor: pointer;
-
     }
 
     &::after,
@@ -77,7 +81,7 @@
     pointer-events: none;
     opacity: 0;
 
-    @media(min-width: 1024px) {
+    @media (min-width: 1024px) {
       opacity: 1;
       pointer-events: auto;
     }
