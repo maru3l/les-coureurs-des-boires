@@ -84,15 +84,6 @@ class Gallery extends Component {
     this.init();
   }
 
-  init() {
-    const { slides } = this.state;
-    const { id } = slides[0];
-    let newSlides = slides;
-    newSlides = setActive(newSlides, id);
-    newSlides = setPrevious(newSlides, id);
-    this.setState({ slides: newSlides });
-  }
-
   getActiveId() {
     const slide = this.state.slides.find(({ active }) => active);
 
@@ -120,6 +111,15 @@ class Gallery extends Component {
     const slide = this.state.slides.find(({ previous }) => previous);
 
     return slide ? slide.id : 0;
+  }
+
+  init() {
+    const { slides } = this.state;
+    const { id } = slides[0];
+    let newSlides = slides;
+    newSlides = setActive(newSlides, id);
+    newSlides = setPrevious(newSlides, id);
+    this.setState({ slides: newSlides });
   }
 
   handleClickToPrevious() {
