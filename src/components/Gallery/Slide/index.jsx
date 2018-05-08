@@ -1,8 +1,9 @@
 // vendor
 import React from 'react';
 
-// utils
+// vendor utils
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
 const Slide = React.forwardRef(({
   title, image, active, width, height,
@@ -30,5 +31,18 @@ const Slide = React.forwardRef(({
     </div>
   );
 });
+
+Slide.propTypes = {
+  title: PropTypes.string,
+  image: PropTypes.shape({}).isRequired,
+  active: PropTypes.boolean,
+  width: PropTypes.string.isRequired,
+  height: PropTypes.string.isRequired,
+};
+
+Slide.defaultProps = {
+  title: '',
+  active: false,
+};
 
 export default Slide;

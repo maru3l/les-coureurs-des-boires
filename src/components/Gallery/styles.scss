@@ -1,4 +1,25 @@
+@import '../../assets/styles/setup.scss';
+
 .gallery {
+  $_breakpoint: 1024;
+
+  border-top: 1px solid $color-grey;
+
+  &__title {
+    text-transform: uppercase;
+    font-size: #{(20 / 14) * 1em};
+    text-align: right;
+
+    @media (min-width: $_breakpoint * 1px) {
+      line-height: #{(337 / 1920) * 100vw};
+      padding-right: my-margin-calculation();
+    }
+
+    &::before {
+      content: '— ';
+    }
+  }
+
   &__list {
     list-style: none;
     margin: 0;
@@ -8,9 +29,14 @@
   }
 
   &__list-wrapper {
-    width: #{(1270 / 1920) * 100vw};
-    height: #{(649 / 1920) * 100vw};
+    width: 100vw;
+    height: #{(4 / 6) * 100vw};
     overflow: hidden;
+
+    @media (min-width: $_breakpoint * 1px) {
+      width: #{(1270 / 1920) * 100vw};
+      height: #{(649 / 1920) * 100vw};
+    }
 
     @media (min-width: 1920px) {
       width: 1270px;
@@ -31,5 +57,42 @@
     &--is-active {
       filter: saturate(100%);
     }
+  }
+
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    @include wrapper;
+
+    @media (min-width: $_breakpoint * 1px) {
+      width: #{((1270 / 1920) * 100vw) - 8.803vw};
+      padding-left: my-margin-calculation();
+      box-sizing: border-box;
+    }
+  }
+
+  &__controller {
+    margin-right: -20px;
+  }
+
+  &__control {
+    background: 0;
+    border: 0;
+    outline: 0;
+    font-size: 2em;
+    color: $color-primary;
+    padding: 0 20px;
+    line-height: 1rem;
+  }
+  //
+  &__count {
+    line-height: 2em;
+  }
+
+  &__caption {
+    width: 100%;
   }
 }

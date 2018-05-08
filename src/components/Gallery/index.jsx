@@ -1,6 +1,9 @@
 // vendor
 import React, { Component } from 'react';
 
+// vendor utils
+import PropTypes from 'prop-types';
+
 // Components
 import Slide from './Slide';
 
@@ -43,7 +46,7 @@ const equilibrate = (array, index) => {
   return result;
 };
 
-const getPosition = (array, id) => {
+const getOffsetWidthFromArray = (array, id) => {
   const index = array.findIndex(({ key }) => key === id);
 
   return array
@@ -51,19 +54,20 @@ const getPosition = (array, id) => {
     .reduce((acc, cur) => acc + cur.props.width, 0);
 };
 
-const setActiveID = (slides, id) => {
-  return slides.map(slide => ({ ...slide, active: slide.id === id }));
-};
+const setActive = (slides, id) =>
+  slides.map(slide => ({ ...slide, active: slide.id === id }));
 
-const setPreviousID = (slides, id) => {
-  return slides.map(slide => ({ ...slide, previous: slide.id === id }));
-};
+const setPrevious = (slides, id) =>
+  slides.map(slide => ({ ...slide, previous: slide.id === id }));
 
 class Gallery extends Component {
   constructor(props) {
     super(props);
 
-    const { images } = props;
+    const {
+      images,
+      images: { length },
+    } = props;
 
     this.listWrapperRef = React.createRef();
 
@@ -72,15 +76,20 @@ class Gallery extends Component {
     this.state = {
       slides,
       throttle: false,
+      length,
     };
   }
 
   componentDidMount() {
+    this.init();
+  }
+
+  init() {
     const { slides } = this.state;
     const { id } = slides[0];
     let newSlides = slides;
-    newSlides = setActiveID(newSlides, id);
-    newSlides = setPreviousID(newSlides, id);
+    newSlides = setActive(newSlides, id);
+    newSlides = setPrevious(newSlides, id);
     this.setState({ slides: newSlides });
   }
 
@@ -92,6 +101,19 @@ class Gallery extends Component {
 
   getArrayIndex(idToFind) {
     return this.state.slides.findIndex(({ id }) => id === idToFind);
+  }
+
+  getDescription(idToFind) {
+    if (!idToFind) return '';
+
+    return this.state.slides.find(({ id }) => id === idToFind).description;
+  }
+
+  getPositionById(idToFind) {
+    const { slides, length } = this.state;
+    const index = slides.findIndex(({ id }) => id === idToFind);
+
+    return index % length;
   }
 
   getPreviousID() {
@@ -115,8 +137,8 @@ class Gallery extends Component {
 
     const { id } = this.state.slides[newIndex];
 
-    slides = setActiveID(slides, id);
-    slides = setPreviousID(slides, prevID);
+    slides = setActive(slides, id);
+    slides = setPrevious(slides, prevID);
 
     this.setState({ slides });
   }
@@ -136,8 +158,8 @@ class Gallery extends Component {
 
     const { id } = this.state.slides[newIndex];
 
-    slides = setActiveID(slides, id);
-    slides = setPreviousID(slides, prevID);
+    slides = setActive(slides, id);
+    slides = setPrevious(slides, prevID);
 
     this.setState({ slides });
   }
@@ -172,15 +194,20 @@ class Gallery extends Component {
   }
 
   render() {
-    // const { throttle } = this.state;
+    const { throttle, length } = this.state;
+    const { title } = this.props;
     const activeID = this.getActiveId();
-    // const previousID = this.getPreviousID();
+    const caption = this.getDescription(activeID);
+    const position = this.getPositionById(activeID) + 1;
     let slidesComponents = this.generateSlidesComponentsArray();
     slidesComponents = equilibrate(
       slidesComponents,
       this.getArrayIndex(activeID),
     );
-    const position = getPosition(slidesComponents, activeID);
+    const offsetWidthFromArray = getOffsetWidthFromArray(
+      slidesComponents,
+      activeID,
+    );
     let width = 0;
 
     if (this.listWrapperRef.current) {
@@ -188,19 +215,23 @@ class Gallery extends Component {
     }
 
     const style = {
-      transform: `translateX(-${position - width}px)`,
-      // transition: throttle ? 'transform 400ms' : 'none',
+      transform: `translateX(-${offsetWidthFromArray - width}px)`,
+      transition: throttle ? 'transform 400ms' : 'none',
     };
 
     return (
       <div className="gallery">
-        <p className="gallery__title">Gallerie instagram</p>
+        <p className="gallery__title">{title}</p>
+
+        <div className="gallery__list-wrapper" ref={this.listWrapperRef}>
+          <div className="gallery__list" style={style}>
+            {slidesComponents}
+          </div>
+        </div>
 
         <div className="gallery__container">
-          <div className="gallery__list-wrapper" ref={this.listWrapperRef}>
-            <div className="gallery__list" style={style}>
-              {slidesComponents}
-            </div>
+          <div className="gallery__count">
+            {position}/{length}
           </div>
 
           <div className="gallery__controller">
@@ -208,30 +239,34 @@ class Gallery extends Component {
               className="gallery__control"
               onClick={() => this.handleClickToPrevious()}
             >
-              prev
+              ‹
             </button>
             <button
               className="gallery__control"
               onClick={() => this.handleClickToNext()}
             >
-              next
+              ›
             </button>
           </div>
 
-          <div className="gallery__count" />
-
           <div className="gallery__caption">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente
-              cum doloremque deserunt assumenda, sit reiciendis voluptates,
-              provident id eveniet commodi eligendi labore neque necessitatibus
-              porro explicabo minus sed, iste dicta.
-            </p>
+            <p>{caption}</p>
           </div>
         </div>
       </div>
     );
   }
 }
+
+Gallery.propTypes = {
+  images: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+  })).isRequired,
+  title: PropTypes.string,
+};
+
+Gallery.defaultProps = {
+  title: null,
+};
 
 export default Gallery;
