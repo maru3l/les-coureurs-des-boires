@@ -26,10 +26,10 @@
   }
 
   &__image {
-    opacity: 0.2;
+    filter: saturate(0);
 
     &--is-active {
-      opacity: 1;
+      filter: saturate(100%);
     }
   }
 }
