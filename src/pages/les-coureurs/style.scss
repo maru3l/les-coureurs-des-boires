@@ -1,0 +1,98 @@
+@import '../../assets/styles/setup.scss';
+
+.les-coureurs {
+  margin-top: 78px;
+
+  @media (min-width: 1024px) {
+    display: flex;
+  }
+
+  &__content {
+    @include wrapper;
+    flex: 2 2;
+
+    @media (min-width: 1024px) {
+      margin-right: 0;
+    }
+  }
+
+  &__title {
+    @include wrapper;
+    @extend %header-font-family;
+    font-size: #{(38 / 14) * 1rem};
+    // max-width: 638px;
+
+    @media (min-width: 1024px) {
+      margin-right: 0;
+    }
+  }
+
+  &__intro-text {
+    @include wrapper;
+    // max-width: 638px;
+  }
+
+  &__photos-section {
+    @include wrapper;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex: 0 0;
+
+    @media (min-width: 1024px) {
+      margin-left: 0;
+    }
+
+    figure {
+      @include wrapper;
+      text-align: center;
+      text-transform: uppercase;
+
+      @media (min-width: 1024px) {
+        margin-left: 0;
+      }
+    }
+  }
+
+  &__image {
+    width: #{(252 / 1920) * 100vw};
+    min-width: 252px;
+  }
+}
+
+.les-coureurs__others {
+  padding: 100px my-margin-calculation();
+  border-top: 1px solid $color-grey;
+
+  @media (min-width: 1024px) {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  &-col {
+    padding: 0 my-margin-calculation();
+
+    @media (min-width: 1024px) {
+      width: #{(465 / 1440) * 100vw};
+
+      &:first-child {
+        padding-right: 0;
+      }
+
+      &:last-child {
+        padding-left: 0;
+      }
+    }
+  }
+
+  &-col-1 {
+    display: flex;
+    align-items: center;
+  }
+
+  &-title {
+    font-size: #{(18 / 14) * 1rem};
+    text-transform: uppercase;
+  }
+}

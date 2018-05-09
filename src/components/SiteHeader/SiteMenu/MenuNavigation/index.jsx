@@ -44,9 +44,9 @@ const MenuNavigation = ({ onLinkClick }) => (
         Conférences
       </ListItemLink> */}
 
-      {/* <ListItemLink to="/les-coureurs" onClick={() => onLinkClick()}>
+      <ListItemLink to="/les-coureurs" onClick={() => onLinkClick()}>
         Les coureurs
-      </ListItemLink> */}
+      </ListItemLink>
     </ul>
   </nav>
 );
