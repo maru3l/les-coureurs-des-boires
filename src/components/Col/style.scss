@@ -1,0 +1,26 @@
+@import '../../assets/styles/setup.scss';
+
+.col {
+  border-top: 1px solid $color-grey;
+  padding: 100px my-margin-calculation();
+
+  &__title {
+    @include wrapper;
+    font-size: #{(18 / 14) * 1rem};
+    text-transform: uppercase;
+  }
+
+  &__content {
+    @include wrapper;
+
+    @media (min-width: 768px) {
+      columns: 2;
+      column-gap: #{(63 / 1920) * 100vw};
+    }
+
+    & > * {
+      margin-top: 0;
+      margin-bottom: 1em;
+    }
+  }
+}
