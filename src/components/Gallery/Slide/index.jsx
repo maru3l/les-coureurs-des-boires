@@ -1,6 +1,9 @@
 // vendor
 import React from 'react';
 
+// vendor components
+import Img from 'gatsby-image';
+
 // vendor utils
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
@@ -15,18 +18,24 @@ const Slide = React.forwardRef(({
   const style = {
     width: `${width}px`,
     height: `${height}px`,
-    backgroundImage: `url(${image.base64})`,
   };
 
   return (
     <div className="gallery__list-item" style={style}>
-      <img
+      {/* <img
         src={image.src}
         alt={title}
         className={className}
         width={width}
         height={height}
         ref={ref}
+      /> */}
+      <Img
+        sizes={image}
+        alt={title}
+        className={className}
+        ref={ref}
+        style={style}
       />
     </div>
   );

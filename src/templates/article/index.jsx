@@ -34,7 +34,7 @@ const createGallery = (gallery = []) => {
   if (gallery === null || gallery.length < 2) return null;
 
   const galleryList = galleryArrayConstructor(gallery);
-  return <Gallery images={galleryList} />;
+  return <Gallery images={galleryList} title="Gallery" />;
 };
 
 class Article extends Component {
@@ -47,11 +47,11 @@ class Article extends Component {
 
   getImageComponentFromGallery(id) {
     return id > 0 &&
-      this.article.sitePicture &&
-      id <= this.article.sitePicture.length ? (
+      this.article.gallery &&
+      id <= this.article.gallery.length ? (
         <Img
-          sizes={this.article.sitePicture[id - 1].sizes}
-          alt={this.article.sitePicture[id - 1].title}
+          sizes={this.article.gallery[id - 1].sizes}
+          alt={this.article.gallery[id - 1].title}
         />
       ) : null;
   }
@@ -180,7 +180,7 @@ export const query = graphql`
         }
       }
       hero {
-        sizes(maxWidth: 1940, maxHeight: 973) {
+        sizes(maxWidth: 1940, maxHeight: 973, quality: 80) {
           ...GatsbyContentfulSizes_withWebp
         }
         ogMeta: resize(width: 1200) {
@@ -188,18 +188,9 @@ export const query = graphql`
         }
         title
       }
-      sitePicture: gallery {
-        sizes(maxWidth: 700) {
-          ...GatsbyContentfulSizes_withWebp
-        }
-        title
-        description
-      }
       gallery {
-        sizes {
-          base64
-          src
-          aspectRatio
+        sizes(maxWidth: 1693, quality: 80) {
+          ...GatsbyContentfulSizes_withWebp
         }
         title
         description
