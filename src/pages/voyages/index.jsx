@@ -164,7 +164,7 @@ export const query = graphql`
           }
           title
           hero {
-            sizes(maxWidth: 304) {
+            sizes(maxWidth: 304, maxHeight: 200, quality: 100) {
               ...GatsbyContentfulSizes_withWebp
             }
             description
