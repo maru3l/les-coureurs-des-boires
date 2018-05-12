@@ -1,9 +1,10 @@
 html,
 body {
   @extend %body-font-family;
+
+  color: $color-primary;
   font-size: #{$font-size * 1px};
   line-height: 2em;
-  color: $color-primary;
 }
 
 p {

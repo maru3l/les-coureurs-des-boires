@@ -6,8 +6,8 @@
   &__title {
     @include wrapper;
     @extend %header-font-family;
-    font-size: #{(38 / 14) * 1rem};
     max-width: 638px;
+    font-size: #{(38 / 14) * 1rem};
   }
 
   &__intro-text {
