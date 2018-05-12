@@ -4,14 +4,17 @@
   $_breakpoint: 1024;
 
   @include wrapper;
+
   padding-top: 98px;
 
   &__title {
     @include wrapper;
+
     @extend %header-font-family;
+
     font-size: #{(32 / 14) * 1rem};
 
-    @media(min-width: $_breakpoint * 1px) {
+    @media (min-width: $_breakpoint * 1px) {
       width: #{(629 / 1920) * 100vw};
     }
   }
@@ -19,35 +22,41 @@
   &__part {
     @include wrapper;
 
-    @media(min-width: $_breakpoint * 1px) {
+    img {
+      max-width: 100%;
+    }
+
+    @media (min-width: $_breakpoint * 1px) {
       display: flex;
       justify-content: space-between;
     }
   }
 
   &__part-image {
-    @media(min-width: $_breakpoint * 1px) {
+    @media (min-width: $_breakpoint * 1px) {
       width: 100%;
     }
 
     &--first {
-      @media(min-width: $_breakpoint * 1px) {
+      @media (min-width: $_breakpoint * 1px) {
         max-width: #{(500 / 1920) * 100vw};
       }
+
       order: 2;
     }
 
     &--second {
-      @media(min-width: $_breakpoint * 1px) {
-        margin-right: #{(109 / 1920) * 100vw};
+      @media (min-width: $_breakpoint * 1px) {
         max-width: #{(391 / 1920) * 100vw};
+        margin-right: #{(109 / 1920) * 100vw};
       }
+
       align-self: center;
     }
   }
 
   &__first-part-text {
-    @media(min-width: $_breakpoint * 1px) {
+    @media (min-width: $_breakpoint * 1px) {
       max-width: #{(629 / 1920) * 100vw};
       flex: 1 1 #{(629 / 1920) * 100vw};
 
@@ -61,30 +70,30 @@
     width: 100vw;
     margin-left: calc(50% - 50vw);
 
-    @media(min-width: $_breakpoint * 1px) {
+    @media (min-width: $_breakpoint * 1px) {
       width: auto;
-      margin-left: auto;
-      margin-right: my-margin-calculation();
       margin-top: #{(86 / 1920) * 100vw};
+      margin-right: my-margin-calculation();
+      margin-left: auto;
     }
   }
 
   &__second-part {
     @include wrapper;
 
-    @media(min-width: $_breakpoint * 1px) {
+    @media (min-width: $_breakpoint * 1px) {
       display: flex;
       justify-content: space-between;
     }
   }
 
   &__second-part-text {
-    @media(min-width: $_breakpoint * 1px) {
-      flex: 1 1 #{(629 / 1920) * 100vw};
-      background-color: $color-background;
+    @media (min-width: $_breakpoint * 1px) {
       max-width: #{(629 / 1920) * 100vw};
-      padding: #{(86 / 1920) * 100vw};
+      flex: 1 1 #{(629 / 1920) * 100vw};
       order: 2;
+      padding: #{(86 / 1920) * 100vw};
+      background-color: $color-background;
       transform: translateY(#{(200 / 1920) * -100vw});
     }
   }
