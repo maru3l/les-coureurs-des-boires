@@ -18,6 +18,7 @@ const PageLivre = ({ data }) => {
       siteMetadata: { siteUrl, title: siteTitle },
     },
   } = data;
+
   return (
     <React.Fragment>
       <Helmet>
