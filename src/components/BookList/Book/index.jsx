@@ -3,7 +3,6 @@ import React from 'react';
 
 // vendor components
 import Img from 'gatsby-image';
-import Vimeo from 'react-vimeo';
 
 // vendor utils
 import PropTypes from 'prop-types';
