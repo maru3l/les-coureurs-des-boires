@@ -10,20 +10,19 @@
   padding: 0 #{(289 / 1920) * 100vw};
 
   &__content {
-    width: #{(327 / 1920) * 100vw};
     min-width: 280px;
     display: flex;
     flex-flow: column;
-    height: 90px;
+    min-height: 114px;
     justify-content: space-between;
-
-    &::after {
-      background-color: $color-background;
-      display: block;
-      height: 12px;
-      content: '';
-      order: 1;
-    }
+    background-image: repeating-linear-gradient(
+      0deg,
+      $color-background 0px,
+      $color-background 12px,
+      transparent 12px,
+      transparent 38px
+    );
+    background-position: center -14px;
   }
 
   &__title,
@@ -31,15 +30,14 @@
     font-size: #{(24 / 14) * 1rem};
     text-transform: uppercase;
     text-align: right;
-    line-height: 12px;
-    background-color: $color-background;
+    line-height: 38px;
     margin: 0;
     padding: 0 27px;
-    min-height: 12px;
   }
 
   &__title {
     order: 0;
+    margin-bottom: 38px;
 
     &::before {
       content: '— ';

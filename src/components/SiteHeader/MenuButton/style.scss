@@ -3,13 +3,14 @@
 .menu-button {
   $_parent: &;
 
-  background-color: $color-primary;
-  border: 0;
-  height: 82px;
-  width: 73px;
   position: relative;
-  outline: 0;
+  width: 73px;
+  height: 82px;
+  border: 0;
+  background-color: $color-primary;
   cursor: pointer;
+  outline: 0;
+  pointer-events: auto;
 
   &__bread {
     position: absolute;
@@ -20,6 +21,7 @@
 
     &--first {
       transition: 200ms;
+
       #{$_parent}__crust {
         transform: translateY(-9.5px);
         transition: all 250ms 200ms;
@@ -37,8 +39,10 @@
     }
 
     &--second {
+
       #{$_parent}__crust {
         transition: 200ms 300ms;
+
         #{$_parent}--is-open & {
           transform: scale(0);
           transition: 250ms;
@@ -48,10 +52,10 @@
 
     &--third {
       transition: 200ms;
+
       #{$_parent}__crust {
         transform: translateY(9.5px);
         transition: all 250ms 200ms;
-
 
         #{$_parent}--is-open & {
           transform: translateY(0) scaleX(3) scaleY(.33);
@@ -67,14 +71,14 @@
   }
 
   &__crust {
+    position: absolute;
+    top: 39.5px;
+    left: 28.5px;
+    display: block;
     width: 16px;
     height: 3px;
     background-color: $color-white;
-    display: block;
-    content: '';
-    top: 39.5px;
-    left: 28.5px;
-    position: absolute;
+    content: "";
     transform-origin: center center;
   }
 
