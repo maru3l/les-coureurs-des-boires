@@ -8,9 +8,10 @@ import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 
 // components
-import HomeHero from '../components/HomeHero';
-import FeaturedArticle from '../components/FeaturedArticle';
 import ArticleList from '../components/ArticleList';
+import FeaturedArticle from '../components/FeaturedArticle';
+import HomeHero from '../components/HomeHero';
+import ThreeLink from '../components/ThreeLink';
 
 class IndexPage extends Component {
   constructor(props) {
@@ -85,7 +86,11 @@ class IndexPage extends Component {
 
           <link rel="canonical" href={`${siteUrl}`} />
         </Helmet>
+
         <HomeHero background={this.data.background.childImageSharp} />
+
+        <ThreeLink />
+
         <div>
           {this.getFeaturedArticles().map(article => (
             <FeaturedArticle article={article} key={article.id} />
