@@ -10,6 +10,7 @@ import RehypeReact from 'rehype-react';
 import PropTypes from 'prop-types';
 
 // components
+import ArticleList from '../../components/ArticleList';
 import PageTitle from '../../components/PageTitle';
 import Gallery from '../../components/Gallery';
 
@@ -34,12 +35,27 @@ const createGallery = (gallery = []) => {
   if (gallery === null || gallery.length < 2) return null;
 
   const galleryList = galleryArrayConstructor(gallery);
-  return <Gallery images={galleryList} title="Gallery" />;
+  return <Gallery images={galleryList} title="Gallerie" />;
 };
+
+const makeArticleList = list =>
+  list.map(node => ({
+    thumbnail: {
+      sizes: node.hero.sizes,
+      alt: node.hero.title,
+    },
+    date: node.publicationDate,
+    title: node.title,
+    excerpt: node.description.description,
+    id: node.id,
+    path: node.fields.path,
+  }));
 
 class Article extends Component {
   constructor(props) {
     super(props);
+
+    console.log(props);
 
     this.article = props.data.article;
     this.site = props.data.site;
@@ -81,6 +97,17 @@ class Article extends Component {
 
   render() {
     const { gallery } = this.article;
+    const {
+      firstRelatedArticles,
+      secondRelatedArticles,
+      thirdRelatedArticles,
+    } = this.props.data;
+
+    const relateds = makeArticleList([
+      firstRelatedArticles,
+      secondRelatedArticles,
+      thirdRelatedArticles,
+    ]);
 
     return (
       <React.Fragment>
@@ -156,13 +183,20 @@ class Article extends Component {
         </div>
 
         {createGallery(gallery)}
+
+        <ArticleList articles={relateds} title="Articles liés" />
       </React.Fragment>
     );
   }
 }
 
 export const query = graphql`
-  query ArticleTemplate($id: String!) {
+  query ArticleTemplate(
+    $id: String!
+    $firstRelatedArticles: String!
+    $secondRelatedArticles: String!
+    $thirdRelatedArticles: String!
+  ) {
     site {
       siteMetadata {
         title
@@ -201,6 +235,62 @@ export const query = graphql`
       }
       description {
         description
+      }
+    }
+    firstRelatedArticles: contentfulArticle(id: { eq: $firstRelatedArticles }) {
+      id
+      title
+      hero {
+        sizes(maxWidth: 768, maxHeight: 505, quality: 100) {
+          ...GatsbyContentfulSizes_withWebp
+        }
+        description
+        title
+      }
+      description {
+        description
+      }
+      publicationDate(formatString: "DD/MM/YYYY")
+      fields {
+        path
+      }
+    }
+    secondRelatedArticles: contentfulArticle(
+      id: { eq: $secondRelatedArticles }
+    ) {
+      id
+      title
+      hero {
+        sizes(maxWidth: 768, maxHeight: 505, quality: 100) {
+          ...GatsbyContentfulSizes_withWebp
+        }
+        description
+        title
+      }
+      description {
+        description
+      }
+      publicationDate(formatString: "DD/MM/YYYY")
+      fields {
+        path
+      }
+    }
+    thirdRelatedArticles: contentfulArticle(id: { eq: $thirdRelatedArticles }) {
+      id
+      title
+      hero {
+        sizes(maxWidth: 768, maxHeight: 505, quality: 100) {
+          ...GatsbyContentfulSizes_withWebp
+        }
+        description
+        title
+      }
+      description {
+        description
+      }
+      publicationDate(formatString: "DD/MM/YYYY")
+      fields {
+        path
       }
     }
   }

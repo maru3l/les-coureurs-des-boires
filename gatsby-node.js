@@ -39,6 +39,9 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             node {
               id
               tags
+              suggestedArticles {
+                id
+              }
               fields {
                 path
               }
@@ -53,26 +56,60 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
     `)
       .then((result) => {
         // Get articles
-        const { data: { allContentfulArticle: { edges: articles } } } = result;
 
+        const {
+          data: {
+            allContentfulArticle: { edges: articles },
+          },
+        } = result;
+
+        // Generate Article page
+        articles.forEach(({ node }) => {
+          const { tags } = node;
+
+          let relatedArticles = articles
+            .map(({ node: article }) => {
+              const articleTag = article.tags.filter(tag => tag !== 'coureurs des boires');
+              const communTags = articleTag.filter(tag =>
+                tags.find(element => element === tag));
+
+              const score = communTags.length / articleTag.length;
+
+              return {
+                id: article.id,
+                score,
+              };
+            })
+            .filter(related => related.id !== node.id)
+            .sort((a, b) => b.score - a.score);
+
+          if (node.suggestedArticles) {
+            relatedArticles = [...node.suggestedArticles, ...relatedArticles];
+          }
+
+          const relatedList = relatedArticles.map(related => related.id);
+
+          createPage({
+            path: node.fields.path,
+            component: path.resolve('./src/templates/article/index.jsx'),
+            context: {
+              id: node.id,
+              firstRelatedArticles: relatedList[0],
+              secondRelatedArticles: relatedList[1],
+              thirdRelatedArticles: relatedList[2],
+            },
+          });
+        });
+
+        // Create Page for each Countries
         // get countries slug
+        // TODO: optimize the request. Use the allContentfulCountry insted
         const countrySlugs = articles.reduce((acc, { node: { country } }) => {
           if (country === null) return acc;
           if (acc.find(slug => slug === country.slug)) return acc;
 
           return [...acc, country.slug];
         }, []);
-
-        // Generate Article page
-        articles.forEach(({ node }) => {
-          createPage({
-            path: node.fields.path,
-            component: path.resolve('./src/templates/article/index.jsx'),
-            context: {
-              id: node.id,
-            },
-          });
-        });
 
         countrySlugs.forEach((slug) => {
           createPage({
@@ -81,6 +118,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           });
         });
 
+        // TODO: Create tags page
         // Generate tags page
         // const tags = result.data.allContentfulArticle.edges
         //   .reduce((acc, { node }) => [...acc, ...node.tags], [])
