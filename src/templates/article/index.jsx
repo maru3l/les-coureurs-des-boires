@@ -11,8 +11,8 @@ import PropTypes from 'prop-types';
 
 // components
 import ArticleList from '../../components/ArticleList';
-import PageTitle from '../../components/PageTitle';
 import Gallery from '../../components/Gallery';
+import PageTitle from '../../components/PageTitle';
 
 // style
 import './style.scss';
@@ -55,21 +55,13 @@ class Article extends Component {
   constructor(props) {
     super(props);
 
-    console.log(props);
-
     this.article = props.data.article;
     this.site = props.data.site;
   }
 
-  getImageComponentFromGallery(id) {
-    return id > 0 &&
-      this.article.gallery &&
-      id <= this.article.gallery.length ? (
-        <Img
-          sizes={this.article.gallery[id - 1].sizes}
-          alt={this.article.gallery[id - 1].title}
-        />
-      ) : null;
+  getGalleryItem(position) {
+    const { gallery } = this.article;
+    return gallery && gallery.length > position ? gallery[position] : null;
   }
 
   getHtmlAstPart(partNumber) {
@@ -108,6 +100,9 @@ class Article extends Component {
       secondRelatedArticles,
       thirdRelatedArticles,
     ]);
+
+    const firstImg = this.getGalleryItem(0);
+    const secondImg = this.getGalleryItem(1);
 
     return (
       <React.Fragment>
@@ -156,9 +151,12 @@ class Article extends Component {
           <h1 className="article-page__title">{this.article.title}</h1>
 
           <div className="article-page__part">
-            <div className="article-page__part-image article-page__part-image--first">
-              {this.getImageComponentFromGallery(1)}
-            </div>
+            {firstImg && (
+              <figure className="article-page__part-image article-page__part-image--first">
+                <Img sizes={firstImg.sizes} alt={firstImg.title} />
+                <figcaption>{firstImg.description}</figcaption>
+              </figure>
+            )}
 
             <div className="article-page__first-part-text">
               {renderAst(this.getHtmlAstPart(1))}
@@ -176,9 +174,12 @@ class Article extends Component {
               {renderAst(this.getHtmlAstPart(2))}
             </div>
 
-            <div className="article-page__part-image article-page__part-image--second">
-              {this.getImageComponentFromGallery(2)}
-            </div>
+            {secondImg && (
+              <figure className="article-page__part-image article-page__part-image--second">
+                <Img sizes={secondImg.sizes} alt={secondImg.title} />
+                <figcaption>{secondImg.description}</figcaption>
+              </figure>
+            )}
           </div>
         </div>
 
@@ -311,6 +312,54 @@ Article.propTypes = {
         childMarkdownRemark: PropTypes.shape({
           html: PropTypes.string,
         }),
+      }),
+    }),
+    firstRelatedArticles: PropTypes.shape({
+      id: PropTypes.string,
+      title: PropTypes.string,
+      hero: PropTypes.shape({
+        sizes: PropTypes.object,
+        description: PropTypes.string,
+        title: PropTypes.string,
+      }),
+      description: PropTypes.shape({
+        description: PropTypes.string,
+      }),
+      publicationDate: PropTypes.string,
+      fields: PropTypes.shape({
+        path: PropTypes.string,
+      }),
+    }),
+    secondRelatedArticles: PropTypes.shape({
+      id: PropTypes.string,
+      title: PropTypes.string,
+      hero: PropTypes.shape({
+        sizes: PropTypes.object,
+        description: PropTypes.string,
+        title: PropTypes.string,
+      }),
+      description: PropTypes.shape({
+        description: PropTypes.string,
+      }),
+      publicationDate: PropTypes.string,
+      fields: PropTypes.shape({
+        path: PropTypes.string,
+      }),
+    }),
+    thirdRelatedArticles: PropTypes.shape({
+      id: PropTypes.string,
+      title: PropTypes.string,
+      hero: PropTypes.shape({
+        sizes: PropTypes.object,
+        description: PropTypes.string,
+        title: PropTypes.string,
+      }),
+      description: PropTypes.shape({
+        description: PropTypes.string,
+      }),
+      publicationDate: PropTypes.string,
+      fields: PropTypes.shape({
+        path: PropTypes.string,
       }),
     }),
   }).isRequired,
