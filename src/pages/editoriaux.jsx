@@ -8,8 +8,9 @@ import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 
 // components
-import PageTitle from '../components/PageTitle';
 import ArticleList from '../components/ArticleList';
+import PageIntro from '../components/PageIntro';
+import PageTitle from '../components/PageTitle';
 
 const EditoriauxPage = ({ data }) => {
   const articles = () => {
@@ -77,6 +78,11 @@ const EditoriauxPage = ({ data }) => {
       </Helmet>
       <h1 style={style.title}>Éditoriaux</h1>
       <PageTitle title="Éditoriaux" />
+      <PageIntro title="Éditoriaux">
+        Comme il est souvent rafraîchissant de se remettre en question, voici
+        quelques articles d'opinion dans lesquels nous exprimons des points de
+        vue pas nécessairement racoleurs...
+      </PageIntro>
       <ArticleList articles={articles()} />
     </React.Fragment>
   );

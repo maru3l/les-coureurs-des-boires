@@ -11,8 +11,7 @@ import PropTypes from 'prop-types';
 import ArticleList from '../../components/ArticleList';
 import ElementSelector from '../../components/ElementSelector';
 import PageTitle from '../../components/PageTitle';
-
-import './style.scss';
+import PageIntro from '../../components/PageIntro';
 
 const formatElementSelectorList = list =>
   list.map(({ slug, name }) => ({ key: slug, value: name }));
@@ -114,28 +113,17 @@ class VoyagesPage extends Component {
           <link rel="canonical" href={`${siteUrl}${pathname}`} />
         </Helmet>
         <PageTitle title="Voyages" />
-
-        <div className="voyages-page">
-          <h1 className="voyages-page__title">
-            Titre de la page avec le mot voyage.
-          </h1>
-
-          <p className="voyages-page__intro-text">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Necessitatibus itaque adipisci quos officia ex dolore est,
-            reprehenderit excepturi, inventore deserunt. Praesentium pariatur
-            repellendus consequatur minima eius repudiandae recusandae, error
-            quam?
-          </p>
-        </div>
-
+        <PageIntro title="Voyages d'exploration brassicole">
+          L'univers de la bière est bien plus vaste que ce que nous croyons.
+          Voici quelques-uns de nos voyages de recherche qui nous ouvert
+          l'esprit... et l'appétit!
+        </PageIntro>
         <ElementSelector
           title="Liste de pays"
           elements={formatElementSelectorList(coutriesList)}
           elementClicked={e => this.handleClick(e)}
           elementSelected={countrySelected}
         />
-
         <ArticleList articles={articles} title="Articles liés" />
       </React.Fragment>
     );

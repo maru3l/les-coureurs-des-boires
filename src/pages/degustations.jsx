@@ -8,8 +8,9 @@ import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 
 // components
-import PageTitle from '../components/PageTitle';
 import ArticleList from '../components/ArticleList';
+import PageIntro from '../components/PageIntro';
+import PageTitle from '../components/PageTitle';
 
 const DégustationsPage = ({ data }) => {
   const articles = () => {
@@ -77,6 +78,10 @@ const DégustationsPage = ({ data }) => {
       </Helmet>
       <h1 style={style.title}>Dégustations</h1>
       <PageTitle title="Dégustations" />
+      <PageIntro title="Dégustations">
+        Présentation de bières issues de nos recherches et et produites au
+        Québec, ainsi que d'autres articles où on analyse l'acte de dégustation
+      </PageIntro>
       <ArticleList articles={articles()} />
     </React.Fragment>
   );
