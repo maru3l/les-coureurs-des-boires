@@ -114,9 +114,9 @@ class VoyagesPage extends Component {
         </Helmet>
         <PageTitle title="Voyages" />
         <PageIntro title="Voyages d'exploration brassicole">
-          L'univers de la bière est bien plus vaste que ce que nous croyons.
+          L&#39;univers de la bière est bien plus vaste que ce que nous croyons.
           Voici quelques-uns de nos voyages de recherche qui nous ouvert
-          l'esprit... et l'appétit!
+          l&#39;esprit... et l&#39;appétit!
         </PageIntro>
         <ElementSelector
           title="Liste de pays"

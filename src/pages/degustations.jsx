@@ -80,7 +80,8 @@ const DégustationsPage = ({ data }) => {
       <PageTitle title="Dégustations" />
       <PageIntro title="Dégustations">
         Présentation de bières issues de nos recherches et et produites au
-        Québec, ainsi que d'autres articles où on analyse l'acte de dégustation
+        Québec, ainsi que d&#39;autres articles où on analyse l&#39;acte de
+        dégustation
       </PageIntro>
       <ArticleList articles={articles()} />
     </React.Fragment>

@@ -80,8 +80,8 @@ const EditoriauxPage = ({ data }) => {
       <PageTitle title="Éditoriaux" />
       <PageIntro title="Éditoriaux">
         Comme il est souvent rafraîchissant de se remettre en question, voici
-        quelques articles d'opinion dans lesquels nous exprimons des points de
-        vue pas nécessairement racoleurs...
+        quelques articles d&#39;opinion dans lesquels nous exprimons des points
+        de vue pas nécessairement racoleurs...
       </PageIntro>
       <ArticleList articles={articles()} />
     </React.Fragment>
