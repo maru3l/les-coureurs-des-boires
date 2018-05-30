@@ -88,7 +88,8 @@ class Article extends Component {
   }
 
   render() {
-    const { gallery } = this.article;
+    const { gallery = [] } = this.article;
+
     const {
       firstRelatedArticles,
       secondRelatedArticles,
@@ -154,7 +155,9 @@ class Article extends Component {
             {firstImg && (
               <figure className="article-page__part-image article-page__part-image--first">
                 <Img sizes={firstImg.sizes} alt={firstImg.title} />
-                <figcaption>{firstImg.description}</figcaption>
+                <figcaption className="article-page__part-image-caption">
+                  {firstImg.description}
+                </figcaption>
               </figure>
             )}
 

@@ -55,6 +55,14 @@
     }
   }
 
+  &__part-image-caption {
+    padding-top: 10px;
+    font-size: .85em;
+    letter-spacing: .1em;
+    line-height: 1.8em;
+    opacity: .7;
+  }
+
   &__first-part-text {
     @media (min-width: $_breakpoint * 1px) {
       max-width: #{(629 / 1920) * 100vw};
