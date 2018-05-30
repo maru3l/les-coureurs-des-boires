@@ -180,7 +180,9 @@ class Article extends Component {
             {secondImg && (
               <figure className="article-page__part-image article-page__part-image--second">
                 <Img sizes={secondImg.sizes} alt={secondImg.title} />
-                <figcaption>{secondImg.description}</figcaption>
+                <figcaption className="article-page__part-image-caption">
+                  {secondImg.description}
+                </figcaption>
               </figure>
             )}
           </div>
