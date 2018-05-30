@@ -99,6 +99,12 @@ module.exports = {
         ],
       },
     },
+    {
+      resolve: 'gatsby-plugin-google-analytics',
+      options: {
+        trackingId: 'UA-120072921-1',
+      },
+    },
     'gatsby-plugin-sitemap',
     'gatsby-plugin-netlify',
   ],
