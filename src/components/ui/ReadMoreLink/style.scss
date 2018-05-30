@@ -1,0 +1,32 @@
+@import "../../../assets/styles/setup.scss";
+
+.read-more-link {
+  width: 48px;
+  display: inline-flex;
+  justify-content: space-between;
+  opacity: .6;
+  transition: opacity 150ms;
+  padding: 1em 0;
+
+  &__dot {
+    display: block;
+    width: 8px;
+    height: 8px;
+    background-color: $color-primary;
+  }
+
+  &__visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+}

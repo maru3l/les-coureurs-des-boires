@@ -1,0 +1,50 @@
+@import "../../assets/styles/setup.scss";
+
+.page-title {
+  height: #{(463 / 1080) * 100vh};
+  min-height: 400px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: $color-white;
+  padding: 0 #{(289 / 1920) * 100vw};
+
+  &__content {
+    min-width: 280px;
+    display: flex;
+    flex-flow: column;
+    min-height: 114px;
+    justify-content: space-between;
+    background-image: repeating-linear-gradient(
+      0deg,
+      $color-background 0px,
+      $color-background 12px,
+      transparent 12px,
+      transparent 38px
+    );
+    background-position: center -14px;
+  }
+
+  &__title,
+  &__sub-title {
+    font-size: #{(24 / 14) * 1rem};
+    text-transform: uppercase;
+    text-align: right;
+    line-height: 38px;
+    margin: 0;
+    padding: 0 27px;
+  }
+
+  &__title {
+    order: 0;
+    margin-bottom: 38px;
+
+    &::before {
+      content: '— ';
+    }
+  }
+
+  &__sub-title {
+    order: 2;
+  }
+}

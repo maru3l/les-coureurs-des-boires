@@ -1,0 +1,74 @@
+@import "../../assets/styles/setup.scss";
+
+.featured-article {
+  $_breakpoint: 1024;
+  $_parent: &;
+
+  padding: my-margin-calculation();
+
+  @media(min-width: $_breakpoint * 1px) {
+    padding: 0 my-margin-calculation();
+    display: flex;
+    justify-content: center;
+  }
+
+  &:not(:last-child) {
+    border-bottom: 1px solid $color-grey;
+  }
+
+  &__image-container {
+    padding-left: my-margin-calculation();
+
+    @media(min-width: $_breakpoint * 1px) {
+      padding-top: my-margin-calculation();
+      align-self: center;
+      text-align: center;
+
+      #{$_parent}:nth-child(2n) & {
+        order: 0;
+        padding-left: 0;
+      }
+    }
+  }
+
+  &__image {
+    @media(min-width: $_breakpoint * 1px) {
+      // width: #{(260 / 1920) * 100vw};
+      width: 30vw;
+    }
+  }
+
+  &__content-container {
+    padding: my-margin-calculation();
+
+    @media(min-width: $_breakpoint * 1px) {
+      padding: my-margin-calculation() 0;
+      border-left: 1px solid $color-grey;
+      width: #{(466 / 1920) * 100vw};
+
+      #{$_parent}:nth-child(2n) & {
+        margin-left: my-margin-calculation();
+        order: 1;
+      }
+    }
+  }
+
+  &__title {
+    font-size: #{(19 / 14) * 1em};
+    text-transform: uppercase;
+    @extend %header-font-family;
+
+    a {
+      text-decoration: none;
+      color: $color-primary;
+      font-size: 2em;
+    }
+
+    @media(min-width: $_breakpoint * 1px) {
+      padding: 0;
+      display: inline;
+      background-color: $color-secondary-light;
+    }
+
+  }
+}

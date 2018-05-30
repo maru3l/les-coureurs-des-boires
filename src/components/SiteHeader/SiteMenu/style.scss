@@ -1,0 +1,22 @@
+@import "../../../assets/styles/setup.scss";
+
+.site-menu {
+  transition: opacity 800ms;
+  position: absolute;
+  opacity: 0;
+  background-color: $color-primary;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  overflow: scroll;
+  pointer-events: none;
+
+  &--is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}

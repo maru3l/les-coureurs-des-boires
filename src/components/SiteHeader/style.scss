@@ -1,0 +1,49 @@
+@import "../../assets/styles/setup.scss";
+
+.site-header {
+  position: fixed;
+  z-index: $zindex-sticky;
+  top: 0;
+  display: flex;
+  width: 100vw;
+  min-height: 82px;
+  box-sizing: border-box;
+  align-items: stretch;
+  padding-top: 20px;
+  padding-right: 73px;
+  padding-left: #{(70 / 1920) * 100vw};
+  pointer-events: none;
+
+  @media (min-width: 500px) {
+    padding-top: 40px;
+  }
+
+  &__logo {
+    position: relative;
+    z-index: 1;
+    width: #{(165 / 1920) * 100vw};
+    min-width: 165px;
+    height: #{(54 / 1920) * 100vw};
+    min-height: 54px;
+    fill: $color-primary;
+    pointer-events: auto;
+
+    &--is-light {
+      fill: $color-white;
+    }
+  }
+
+  &::after {
+    display: block;
+    flex: 2 2;
+    border-top: 1px solid $color-primary;
+    margin: 0 38px;
+    content: "";
+    opacity: 0;
+    transition: opacity 800ms;
+
+    @media (min-width: 500px) {
+      opacity: 1;
+    }
+  }
+}

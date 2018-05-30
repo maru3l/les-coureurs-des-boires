@@ -1,0 +1,13 @@
+@import "../../assets/styles/setup.scss";
+
+.site-footer {
+  background-color: $color-primary;
+  color: $color-background;
+  font-size: .75em;
+  line-height: 50px;
+  text-align: center;
+
+  p {
+    margin: 0;
+  }
+}
