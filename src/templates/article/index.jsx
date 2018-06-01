@@ -35,7 +35,7 @@ const createGallery = (gallery = []) => {
   if (gallery === null || gallery.length < 2) return null;
 
   const galleryList = galleryArrayConstructor(gallery);
-  return <Gallery images={galleryList} title="Gallerie" />;
+  return <Gallery images={galleryList} title="Galerie" />;
 };
 
 const makeArticleList = list =>
