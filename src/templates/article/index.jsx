@@ -148,7 +148,7 @@ class Article extends Component {
           title={this.article.category}
           subTitle={this.getSubTitle()}
         />
-        <div className="article-page">
+        <article className="article-page">
           <h1 className="article-page__title">{this.article.title}</h1>
 
           <div className="article-page__part">
@@ -186,7 +186,7 @@ class Article extends Component {
               </figure>
             )}
           </div>
-        </div>
+        </article>
 
         {createGallery(gallery)}
 
