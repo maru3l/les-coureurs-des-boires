@@ -1,10 +1,19 @@
+// vendor
 import React from 'react';
+
+// utils
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
+// style
 import './style.scss';
 
-const PageTitle = ({ title, subTitle }) => (
-  <div className="page-title">
+const PageTitle = ({ title, subTitle, backgroundIsBlue }) => (
+  <div
+    className={classNames('page-title', {
+        'page-title--is-blue': backgroundIsBlue,
+      })}
+  >
     <div className="page-title__content">
       <p className="page-title__title">{title}</p>
 
@@ -16,10 +25,12 @@ const PageTitle = ({ title, subTitle }) => (
 PageTitle.propTypes = {
   title: PropTypes.string.isRequired,
   subTitle: PropTypes.string,
+  backgroundIsBlue: PropTypes.bool,
 };
 
 PageTitle.defaultProps = {
   subTitle: null,
+  backgroundIsBlue: false,
 };
 
 export default PageTitle;

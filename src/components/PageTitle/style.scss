@@ -1,38 +1,78 @@
 @import "../../assets/styles/setup.scss";
 
 .page-title {
+  $_parent: &;
+  $_breakpoint: 1024;
+
+  position: relative;
+  display: flex;
   height: #{(463 / 1080) * 100vh};
   min-height: 400px;
-  display: flex;
-  justify-content: flex-end;
   align-items: center;
-  background-color: $color-white;
+  justify-content: flex-end;
   padding: 0 #{(289 / 1920) * 100vw};
+  background-color: $color-white;
+
+  &--is-blue {
+    background-color: $color-primary;
+
+    &::after {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: #{(179 / 1910) * 100vw};
+      height: 400px;
+      background-image: url("./../../assets/imgs/pen-with-innerColor.svg");
+      background-size: cover;
+      content: "";
+      opacity: 0;
+      transform: translate(#{(346 / 1910) * -100vw}, #{(105 / 1910) * -100vw});
+      transition: opacity 200ms ease-in-out;
+
+      @media (min-width: #{$_breakpoint * 1px}) {
+        opacity: 1;
+      }
+    }
+  }
 
   &__content {
-    min-width: 280px;
     display: flex;
-    flex-flow: column;
+    min-width: 280px;
     min-height: 114px;
+    flex-flow: column;
     justify-content: space-between;
     background-image: repeating-linear-gradient(
       0deg,
-      $color-background 0px,
+      $color-background 0,
       $color-background 12px,
       transparent 12px,
       transparent 38px
     );
     background-position: center -14px;
+
+    #{$_parent}--is-blue & {
+      background-image: repeating-linear-gradient(
+        0deg,
+        #1e4051 0,
+        #1e4051 12px,
+        transparent 12px,
+        transparent 38px
+      );
+    }
   }
 
   &__title,
   &__sub-title {
-    font-size: #{(24 / 14) * 1rem};
-    text-transform: uppercase;
-    text-align: right;
-    line-height: 38px;
-    margin: 0;
     padding: 0 27px;
+    margin: 0;
+    font-size: #{(24 / 14) * 1rem};
+    line-height: 38px;
+    text-align: right;
+    text-transform: uppercase;
+
+    #{$_parent}--is-blue & {
+      color: $color-white;
+    }
   }
 
   &__title {
@@ -40,7 +80,7 @@
     margin-bottom: 38px;
 
     &::before {
-      content: '— ';
+      content: "— ";
     }
   }
 
