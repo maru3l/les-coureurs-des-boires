@@ -88,7 +88,7 @@ class Article extends Component {
   }
 
   render() {
-    const { gallery = [] } = this.article;
+    const { gallery = [], category } = this.article;
 
     const {
       firstRelatedArticles,
@@ -104,6 +104,8 @@ class Article extends Component {
 
     const firstImg = this.getGalleryItem(0);
     const secondImg = this.getGalleryItem(1);
+
+    const heroIsBlue = category === 'Voyage';
 
     return (
       <React.Fragment>
@@ -147,6 +149,7 @@ class Article extends Component {
         <PageTitle
           title={this.article.category}
           subTitle={this.getSubTitle()}
+          backgroundIsBlue={heroIsBlue}
         />
         <article className="article-page">
           <h1 className="article-page__title">{this.article.title}</h1>
