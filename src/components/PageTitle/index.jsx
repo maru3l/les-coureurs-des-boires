@@ -11,9 +11,12 @@ import './style.scss';
 const PageTitle = ({ title, subTitle, backgroundIsBlue }) => (
   <div
     className={classNames('page-title', {
-        'page-title--is-blue': backgroundIsBlue,
-      })}
+      'page-title--is-blue': backgroundIsBlue,
+    })}
   >
+
+    {backgroundIsBlue && (<div className="page-title__fake-header" />)}
+    
     <div className="page-title__content">
       <p className="page-title__title">{title}</p>
 
