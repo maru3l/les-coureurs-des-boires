@@ -1,0 +1,6 @@
+// Ax + B = y
+@function linear($x2: 0, $y2: 0, $x1: 0, $y1: 0) {
+  @return calc(
+    #{$y1 * 1px} + #{$y2 - $y1} * ((100vw - #{$y1 * 1px}) / #{$x2 - $x1})
+  );
+}

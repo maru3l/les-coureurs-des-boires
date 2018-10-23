@@ -65,15 +65,24 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 
         // Generate Article page
         articles.forEach(({ node }) => {
-          const { tags } = node;
+          const { tags = [] } = node;
 
           let relatedArticles = articles
             .map(({ node: article }) => {
-              const articleTag = article.tags.filter(tag => tag !== 'coureurs des boires');
-              const communTags = articleTag.filter(tag =>
-                tags.find(element => element === tag));
+              let score = 0;
 
-              const score = communTags.length / articleTag.length;
+              if (article.tags) {
+                const articleTag = article.tags.filter(tag => tag !== 'coureurs des boires');
+
+                let communTags = [];
+
+                if (tags) {
+                  communTags = articleTag.filter(tag =>
+                    tags.find(element => element === tag));
+                }
+
+                score = communTags.length / articleTag.length;
+              }
 
               return {
                 id: article.id,
